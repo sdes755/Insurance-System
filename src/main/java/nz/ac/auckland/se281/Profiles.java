@@ -25,7 +25,7 @@ public class Profiles{
         if(truth == 1){
             Usernames.add(userName);
             Ages.add(age);
-            MessageCli.PROFILE_CREATED.printMessage(userName,) 
+            MessageCli.PROFILE_CREATED.printMessage(userName,Integer.toString(age));
         }  else{
             MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
         } 
@@ -34,15 +34,24 @@ public class Profiles{
 //Creating a new method to count the number of profiles in the database
     public void PrintProfiles(){
         int num = Usernames.size();
-
+        int rank = 1;
         for(int i = 0; i< num; i++){
-            String User = Usernames.get(i);
-            String Age = Integer.toString(Ages.get(i));
 
-            MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(num), User, Age);
+           
+            while(rank <= num){
+                MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(rank), Usernames.get(rank),Integer.toString(Ages.get(rank)));
+                rank = rank + 1;
           }
-
+        }
+          
+          
     
+    }
+
+    public int Num(){
+        int number = Usernames.size();
+
+        return number;
     }
     
 }

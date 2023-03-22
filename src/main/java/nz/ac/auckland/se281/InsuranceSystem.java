@@ -10,7 +10,19 @@ public class InsuranceSystem {
   Profiles profiles = new Profiles();
   public void printDatabase() {
     // TODO: Complete this method.
-    profiles.PrintProfiles();
+
+    int num = profiles.Num();
+
+    if(num == 1){
+    MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(num),"",":");
+    }else if(num > 1){
+    MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(num),"s",":");
+    }else{
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s",".");
+    }
+  
+  for(int i = 0; i<num;i++)
+      profiles.PrintProfiles();
   }
 
   public void createNewProfile(String userName, String age) {
