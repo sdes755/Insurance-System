@@ -37,16 +37,14 @@ public class Profiles{
         int rank = 1;
         for(int i = 0; i< num; i++){
 
-           
-            while(rank <= num){
-                MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(rank), Usernames.get(rank),Integer.toString(Ages.get(rank)));
+                MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(rank), Usernames.get(i),Integer.toString(Ages.get(i)));
                 rank = rank + 1;
           }
         }
           
           
     
-    }
+    
 
     public int Num(){
         int number = Usernames.size();

@@ -21,9 +21,10 @@ public class InsuranceSystem {
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s",".");
     }
   
-  for(int i = 0; i<num;i++)
+  
       profiles.PrintProfiles();
   }
+
 
   public void createNewProfile(String userName, String age) {
     
