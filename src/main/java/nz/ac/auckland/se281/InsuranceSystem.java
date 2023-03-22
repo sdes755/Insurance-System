@@ -10,11 +10,7 @@ public class InsuranceSystem {
   Profiles profiles = new Profiles();
   public void printDatabase() {
     // TODO: Complete this method.
-    int num = profiles.NumProfiles();
-x
-    for(int i = 0; i< num; i++){
-      MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(num, userName, age);
-    }
+    profiles.PrintProfiles();
   }
 
   public void createNewProfile(String userName, String age) {

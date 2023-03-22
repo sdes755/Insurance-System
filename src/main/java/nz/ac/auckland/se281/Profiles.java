@@ -24,17 +24,25 @@ public class Profiles{
 //Checking the truth value, if 1, we add the usernames and ages. if 0, we print the error message.
         if(truth == 1){
             Usernames.add(userName);
-        Ages.add(age);
+            Ages.add(age);
+            MessageCli.PROFILE_CREATED.printMessage(userName,) 
         }  else{
             MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
         } 
 
 }
 //Creating a new method to count the number of profiles in the database
-    public int NumProfiles(){
+    public void PrintProfiles(){
         int num = Usernames.size();
-        return num;
+
+        for(int i = 0; i< num; i++){
+            String User = Usernames.get(i);
+            String Age = Integer.toString(Ages.get(i));
+
+            MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(num), User, Age);
+          }
+
+    
     }
     
-    public String Print()
 }
