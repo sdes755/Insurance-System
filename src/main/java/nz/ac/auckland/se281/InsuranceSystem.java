@@ -24,6 +24,7 @@ public class InsuranceSystem {
     if(Integer.parseInt(age) < 0){
       MessageCli.INVALID_AGE.printMessage(age,beg);
     }
+    
   }
 
   public void loadProfile(String userName) {
