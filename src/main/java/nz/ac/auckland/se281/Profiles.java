@@ -35,6 +35,7 @@ public class Profiles{
     public void PrintProfiles(){
         int num = Usernames.size();
         int rank = 1;
+        //Using a for loop to run through each element in the array list and printing it out one by one in the database
         for(int i = 0; i< num; i++){
 
             MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(rank), Usernames.get(i),Integer.toString(Ages.get(i)));
@@ -42,20 +43,23 @@ public class Profiles{
           }
         }
           
-
+//Created a method to count the number of profiles in the database
     public int Num(){
         int number = Usernames.size();
 
         return number;
     }
-
+//Created a method to check if the inputted age is in the correct format and does not have a decimal point or character.
     public int AgeFormat(String age){
+       //Intialising a truth value
         int truthv = 1;
         for(int i = 0; i < age.length(); i++ ){
+            //If not a digit, turth value is changed to zero
             if(!Character.isDigit(age.charAt(i))){
                 truthv = 0;
             }
         }
+        //Truth value is returned, and if 1, the age is passed.
        return truthv;
     }
     
