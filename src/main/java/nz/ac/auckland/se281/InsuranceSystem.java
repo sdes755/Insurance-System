@@ -9,7 +9,6 @@ public class InsuranceSystem {
   }
   Profiles profiles = new Profiles();
   public void printDatabase() {
-    // TODO: Complete this method.
 
     int num = profiles.Num();
 
@@ -20,8 +19,6 @@ public class InsuranceSystem {
     }else{
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s",".");
     }
-  
-  
       profiles.PrintProfiles();
   }
 
@@ -31,9 +28,19 @@ public class InsuranceSystem {
     userName = userName.toLowerCase();
     String beg = userName.substring(0,1).toUpperCase() + userName.substring(1);
     //System.out.println(beg);
-    if(beg.length()< 3){
+    
+    try{
+      Integer.parseInt(age);
+    }
+    catch (NumberFormatException e)
+    {
+      MessageCli.INVALID_AGE.printMessage(beg,age);
+    }
+
+ if(beg.length()< 3){
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(beg);
-    }else if(Integer.parseInt(age) < 0){
+
+ }else if(Integer.parseInt(age) < 0){
       MessageCli.INVALID_AGE.printMessage(age,beg);
     }else{
      profiles.AddUsernamesandAges(beg, Integer.parseInt(age));
