@@ -16,11 +16,11 @@ public class Profiles{
 //Using a for loop to check if the inputted username is unique
         int truth = 1;
         for(int i = 0; i<Usernames.size(); i++){
-//If it is unique, we change the truth value to 0, and it will not be added
+//If it is not unique, we change the truth value to 0, and it will not be added
             if(userName.equals(Usernames.get(i)) == true ){
                 truth = 0;
             }
-        }
+        }       
 //Checking the truth value, if 1, we add the usernames and ages. if 0, we print the error message.
         if(truth == 1){
             Usernames.add(userName);
@@ -37,19 +37,26 @@ public class Profiles{
         int rank = 1;
         for(int i = 0; i< num; i++){
 
-                MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(rank), Usernames.get(i),Integer.toString(Ages.get(i)));
-                rank = rank + 1;
+            MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(Integer.toString(rank), Usernames.get(i),Integer.toString(Ages.get(i)));
+            rank = rank + 1;
           }
         }
           
-          
-    
-    
 
     public int Num(){
         int number = Usernames.size();
 
         return number;
+    }
+
+    public int AgeFormat(String age){
+        int truthv = 1;
+        for(int i = 0; i < age.length(); i++ ){
+            if(!Character.isDigit(age.charAt(i))){
+                truthv = 0;
+            }
+        }
+       return truthv;
     }
     
 }
