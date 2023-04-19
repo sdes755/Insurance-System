@@ -8,6 +8,8 @@ public class Profiles {
 
   private ArrayList<Integer> Ages = new ArrayList<Integer>();
 
+  private ArrayList<String> loadedUsers = new ArrayList<String>();
+
   // Creating a method to store the Usernames and Ages in the array lists
   public void addUserAges(String userName, int age) {
     // Using a for loop to check if the inputted username is unique
@@ -63,5 +65,21 @@ public class Profiles {
     }
     // Truth value is returned, and if 1, the age is passed.
     return truthv;
+  }
+
+  public void profileLoad(String userName) {
+    int truth = 0;
+    for (int i = 0; i < Usernames.size(); i++) {
+
+      if (userName.equals(Usernames.get(i)) == true) {
+        truth = 1;
+      }
+    }
+    if (truth == 1) {
+      loadedUsers.add(userName);
+      MessageCli.PROFILE_LOADED.printMessage(userName);
+    } else {
+      MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
+    }
   }
 }
