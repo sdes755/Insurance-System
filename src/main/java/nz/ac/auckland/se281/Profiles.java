@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import java.util.ArrayList;
 
 public class Profiles {
-  // Creating two array lists for Usernames and the Ages to be stored in
+  // Crecating two array lists for Usernames and the Ages to be stored in
   private ArrayList<String> Usernames = new ArrayList<String>();
 
   private ArrayList<Integer> Ages = new ArrayList<Integer>();
@@ -38,12 +38,12 @@ public class Profiles {
   public void printProfiles() {
 
     int num = Usernames.size();
-
+    int loadnum = loadedUsers.size();
     int rank = 1;
     // Using a for loop to run through each element in the array list and printing it out one by one
     // in the database
     for (int i = 0; i < num; i++) {
-      if ((loadedUsers.get(0)).equals(Usernames.get(i))) {
+      if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
         MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
             "*** ", Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       } else {
@@ -76,13 +76,19 @@ public class Profiles {
 
   public void profileLoad(String userName) {
     int truth = 0;
+
     for (int i = 0; i < Usernames.size(); i++) {
 
       if (userName.equals(Usernames.get(i)) == true) {
         truth = 1;
       }
     }
-    if (truth == 1) {
+    if (truth == 1 && loadedUsers.size() == 0) {
+      loadedUsers.add(userName);
+      MessageCli.PROFILE_LOADED.printMessage(userName);
+    } else if (truth == 1 && loadedUsers.size() == 1) {
+
+      loadedUsers.remove(0);
       loadedUsers.add(userName);
       MessageCli.PROFILE_LOADED.printMessage(userName);
     } else {
@@ -97,6 +103,29 @@ public class Profiles {
       String userUnload = loadedUsers.get(0);
       loadedUsers.remove(0);
       MessageCli.PROFILE_UNLOADED.printMessage(userUnload);
+    }
+  }
+
+  public void profileDelete(String userName) {
+    int loadnum = loadedUsers.size();
+    if (loadnum == 1 && (userName.equals(loadedUsers.get(0)))) {
+      MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
+      return;
+    }
+    int profileCheck = 0;
+    int profileIndex = 0;
+    for (int i = 0; i < Usernames.size(); i++) {
+      if (userName.equals(Usernames.get(i)) == true) {
+        profileCheck = 1;
+        profileIndex = i;
+      }
+    }
+
+    if (profileCheck == 1) {
+      Usernames.remove(profileIndex);
+      MessageCli.PROFILE_DELETED.printMessage(userName);
+    } else {
+      MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
     }
   }
 }
