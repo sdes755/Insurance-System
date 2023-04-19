@@ -48,7 +48,10 @@ public class InsuranceSystem {
   }
 
   public void loadProfile(String userName) {
-    // TODO: Complete this method.
+    userName = userName.toLowerCase();
+    String correctUser = userName.substring(0, 1).toUpperCase() + userName.substring(1);
+
+    profiles.profileLoad(correctUser);
   }
 
   public void unloadProfile() {

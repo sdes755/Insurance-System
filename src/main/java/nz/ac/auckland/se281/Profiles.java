@@ -40,9 +40,12 @@ public class Profiles {
     // Using a for loop to run through each element in the array list and printing it out one by one
     // in the database
     for (int i = 0; i < num; i++) {
-
-      MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-          Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
+      if ((loadedUsers.get(0)) == (Usernames.get(i))) {
+        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(Usernames.get(i));
+      } else {
+        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
+            Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
+      }
       rank = rank + 1;
     }
   }
@@ -80,6 +83,16 @@ public class Profiles {
       MessageCli.PROFILE_LOADED.printMessage(userName);
     } else {
       MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
+    }
+  }
+
+  public void profileUnload() {
+    if (loadedUsers.size() == 0) {
+      MessageCli.NO_PROFILE_LOADED.printMessage();
+    } else {
+      String userUnload = loadedUsers.get(0);
+      loadedUsers.remove(0);
+      MessageCli.PROFILE_UNLOADED.printMessage(userUnload);
     }
   }
 }
