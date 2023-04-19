@@ -123,6 +123,7 @@ public class Profiles {
 
     if (profileCheck == 1) {
       Usernames.remove(profileIndex);
+      Ages.remove(profileIndex);
       MessageCli.PROFILE_DELETED.printMessage(userName);
     } else {
       MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
