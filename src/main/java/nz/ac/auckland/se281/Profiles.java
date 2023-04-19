@@ -14,7 +14,10 @@ public class Profiles {
   public void addUserAges(String userName, int age) {
     // Using a for loop to check if the inputted username is unique
     int truth = 1;
-
+    if (loadedUsers.size() == 1) {
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedUsers.get(0));
+      return;
+    }
     for (int i = 0; i < Usernames.size(); i++) {
       // If it is not unique, we change the truth value to 0, and it will not be added
       if (userName.equals(Usernames.get(i)) == true) {
@@ -40,8 +43,9 @@ public class Profiles {
     // Using a for loop to run through each element in the array list and printing it out one by one
     // in the database
     for (int i = 0; i < num; i++) {
-      if ((loadedUsers.get(0)) == (Usernames.get(i))) {
-        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(Usernames.get(i));
+      if ((loadedUsers.get(0)).equals(Usernames.get(i))) {
+        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
+            "*** ", Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       } else {
         MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
             Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));

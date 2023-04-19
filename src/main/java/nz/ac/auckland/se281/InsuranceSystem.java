@@ -55,7 +55,7 @@ public class InsuranceSystem {
   }
 
   public void unloadProfile() {
-    // TODO: Complete this method.
+    profiles.profileUnload();
   }
 
   public void deleteProfile(String userName) {
