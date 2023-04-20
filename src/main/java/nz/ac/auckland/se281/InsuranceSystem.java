@@ -64,14 +64,5 @@ public class InsuranceSystem {
     profiles.profileDelete(correctUser);
   }
 
-  public void createPolicy(PolicyType type, String[] options) {
-    int truth = profiles.loadProfCheck();
-    String user = profiles.userLoaded();
-    String age = 
-    if (truth == 0) {
-      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
-    } else {
-      MessageCli.NEW_POLICY_CREATED.printMessage((type.toString()).toLowerCase(), user);
-    }
-  }
+  public void createPolicy(PolicyType type, String[] options) {}
 }

@@ -144,5 +144,17 @@ public class Profiles {
     return loadedUsers.get(0);
   }
 
-  public String
+  public int userloadAge() {
+
+    int profileIndex = 0;
+
+    for (int i = 0; i < Usernames.size(); i++) {
+      if ((loadedUsers.get(0)).equals(Usernames.get(i)) == true) {
+
+        profileIndex = i;
+      }
+    }
+
+    return Ages.get(profileIndex);
+  }
 }
