@@ -109,6 +109,7 @@ public class Profiles {
     } else {
       String userUnload = loadedUsers.get(0);
       loadedUsers.remove(0);
+      loadedUsersAge.remove(0);
       MessageCli.PROFILE_UNLOADED.printMessage(userUnload);
     }
   }
