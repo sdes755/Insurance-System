@@ -16,7 +16,7 @@ public class LifePolicy extends Policies {
       MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(name);
     }
     // System.out.println(loadedUsers);
-    // System.out.println(age);
+    System.out.println(age);
     int sumInsured = Integer.parseInt(options[0]);
     double baseP = sumInsured * ((1 + age / 100) / 100);
     int baseP1 = (int) baseP;

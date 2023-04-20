@@ -74,15 +74,17 @@ public class InsuranceSystem {
     int truth = profiles.loadProfCheck();
     ArrayList<String> loadedUsers = profiles.getList();
     ArrayList<Integer> loadedUsersAge = profiles.getList2();
-    if (truth == 0) {
+    if (truth == 0 && loadedUsers.size() == 0) {
       MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
     }
-    if ((type.toString()).equals("HOME")) {
+    if ((type.toString()).equals("HOME") && loadedUsers.size() == 1) {
       home.basePremium(options, loadedUsers, loadedUsersAge);
-    } else if ((type.toString()).equals("CAR")) {
+    } else if ((type.toString()).equals("CAR") && loadedUsers.size() == 1) {
       car.basePremium(options, loadedUsers, loadedUsersAge);
-    } else {
+    } else if ((type.toString()).equals("LIFE") && loadedUsers.size() == 1) {
       life.basePremium(options, loadedUsers, loadedUsersAge);
+    } else {
+
     }
   }
 }
