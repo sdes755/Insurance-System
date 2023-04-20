@@ -141,6 +141,7 @@ public class Profiles {
   }
 
   public String userLoaded() {
+
     return loadedUsers.get(0);
   }
 

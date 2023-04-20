@@ -64,5 +64,24 @@ public class InsuranceSystem {
     profiles.profileDelete(correctUser);
   }
 
-  public void createPolicy(PolicyType type, String[] options) {}
+  Policies home = new HomePolicy();
+  Policies car = new CarPolicy();
+  Policies life = new LifePolicy();
+
+  public void createPolicy(PolicyType type, String[] options) {
+    int truth = profiles.loadProfCheck();
+    String user = profiles.userLoaded();
+    if (truth == 0) {
+      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
+    } else {
+      MessageCli.NEW_POLICY_CREATED.printMessage((type.toString()).toLowerCase(), user);
+    }
+    if ((type.toString()).equals("HOME")) {
+      home.basePremium(options);
+    } else if ((type.toString()).equals("CAR")) {
+      car.basePremium(options);
+    } else {
+      life.basePremium(options);
+    }
+  }
 }
