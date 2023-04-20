@@ -129,4 +129,20 @@ public class Profiles {
       MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
     }
   }
+
+  public int loadProfCheck() {
+    int truth = 0;
+    if (loadedUsers.size() == 1) {
+      truth = 1;
+    } else {
+      truth = 0;
+    }
+    return truth;
+  }
+
+  public String userLoaded() {
+    return loadedUsers.get(0);
+  }
+
+  public String
 }
