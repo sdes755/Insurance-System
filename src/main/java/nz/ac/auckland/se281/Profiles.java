@@ -10,6 +10,8 @@ public class Profiles {
 
   private ArrayList<String> loadedUsers = new ArrayList<String>();
 
+  private ArrayList<Integer> loadedUsersAge = new ArrayList<Integer>();
+
   // Creating a method to store the Usernames and Ages in the array lists
   public void addUserAges(String userName, int age) {
     // Using a for loop to check if the inputted username is unique
@@ -76,20 +78,25 @@ public class Profiles {
 
   public void profileLoad(String userName) {
     int truth = 0;
+    int profileIndex = 0;
 
     for (int i = 0; i < Usernames.size(); i++) {
 
       if (userName.equals(Usernames.get(i)) == true) {
         truth = 1;
+        profileIndex = i;
       }
     }
     if (truth == 1 && loadedUsers.size() == 0) {
       loadedUsers.add(userName);
+      loadedUsersAge.add(Ages.get(profileIndex));
       MessageCli.PROFILE_LOADED.printMessage(userName);
     } else if (truth == 1 && loadedUsers.size() == 1) {
 
       loadedUsers.remove(0);
+      loadedUsersAge.remove(0);
       loadedUsers.add(userName);
+      loadedUsersAge.add(Ages.get(profileIndex));
       MessageCli.PROFILE_LOADED.printMessage(userName);
     } else {
       MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
@@ -140,22 +147,32 @@ public class Profiles {
     return truth;
   }
 
-  public String userLoaded() {
-
-    return loadedUsers.get(0);
-  }
-
-  public int userloadAge() {
-
-    int profileIndex = 0;
-
-    for (int i = 0; i < Usernames.size(); i++) {
-      if ((loadedUsers.get(0)).equals(Usernames.get(i)) == true) {
-
-        profileIndex = i;
+  /*  public String userLoaded() {
+      if (loadedUsers.size() == 1) {
+        return loadedUsers.get(0);
       }
+      return null;
     }
 
-    return Ages.get(profileIndex);
+    public void userloadAge() {
+
+      String user = loadedUsers.get(0);
+      int profileIndex = 5;
+
+      for (int i = 0; i < Usernames.size(); i++) {
+
+        if (user.equals(Usernames.get(i))) {
+          profileIndex = i;
+        }
+      }
+      loadedUsersAge.add(profileIndex);
+    }
+  */
+  public ArrayList<String> getList() {
+    return loadedUsers;
+  }
+
+  public ArrayList<Integer> getList2() {
+    return loadedUsersAge;
   }
 }
