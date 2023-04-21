@@ -8,7 +8,11 @@ public class CarPolicy extends Policies {
     super(options, user, age);
 
     this.makeModel = options[1];
-    this.mechB = Boolean.parseBoolean(options[3]);
+    if (options[3].compareTo("yes") == 0) {
+      this.mechB = true;
+    } else {
+      this.mechB = false;
+    }
     setBasePremium();
   }
 
@@ -26,12 +30,19 @@ public class CarPolicy extends Policies {
 
   @Override
   public int setBasePremium() {
-
-    if (mechB) {
-
+    double baseP;
+    if (age > 25) {
+      baseP = 0.1 * sumInsured;
     } else {
-      ;
+      baseP = 0.15 * sumInsured;
     }
+    if (mechB) {
+      basePremium = (int) baseP + 80;
+    } else {
+      basePremium = (int) baseP;
+    }
+    System.out.println(basePremium);
+    MessageCli.NEW_POLICY_CREATED.printMessage("car", userName);
     return basePremium;
   }
 }

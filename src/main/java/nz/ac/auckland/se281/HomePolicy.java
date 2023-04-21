@@ -1,7 +1,5 @@
 package nz.ac.auckland.se281;
 
-import java.util.Set;
-
 public class HomePolicy extends Policies {
 
   private String address;
@@ -32,7 +30,7 @@ public class HomePolicy extends Policies {
 
   @Override
   public int setBasePremium() {
-    
+
     if (rental) {
       basePremium = (int) (sumInsured * 0.02);
     } else {
