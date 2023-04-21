@@ -34,6 +34,7 @@ public class InsuranceSystem {
     // After the header line gets printed, we print the databse using the method made in profiles
     // class
     profiles.printProfiles();
+    profiles.NumPolicies(CarUsers, LifeUsers, HomeUsers);
   }
 
   public void createNewProfile(String userName, String age) {
@@ -74,12 +75,10 @@ public class InsuranceSystem {
   }
 
   public void createPolicy(PolicyType type, String[] options) {
-    ArrayList<String> loadedUsers = profiles.getList();
-    ArrayList<Integer> loadedUsersAge = profiles.getList2();
-    String user = loadedUsers.get(0);
-    double age = loadedUsersAge.get(0);
 
-    if (loadedUsers.size() == 1) {
+    String user = profiles.loadedUser();
+    int age = profiles.loadAge();
+    if (age != 0) {
       if (type == PolicyType.CAR) {
         CarPolicy car = new CarPolicy(options, user, age);
         carPolicies.add(car);
@@ -88,19 +87,32 @@ public class InsuranceSystem {
         HomePolicy home = new HomePolicy(options, user, age);
         homePolicies.add(home);
         HomeUsers.add(user);
-      } else if (type == PolicyType.LIFE) {
+      } else if (type == PolicyType.LIFE && age < 100) {
         LifePolicy life = new LifePolicy(options, user, age);
         lifePolicies.add(life);
         LifeUsers.add(user);
+      } else if (type == PolicyType.LIFE && age > 100) {
+        MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
       }
     } else {
-      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(user);
+      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
     }
 
-    //   for (LifePolicy tempLifePolicy : lifePolicies) {
-    //     System.out.println(tempLifePolicy.getBasePremium());
-    //     ;
-    //   }
+    for (LifePolicy tempLifePolicy : lifePolicies) {
+      System.out.println(tempLifePolicy.getBasePremium());
+      ;
+    }
+    // for (CarPolicy tempCarPolicy : carPolicies) {
+    // System.out.println(tempCarPolicy.getBasePremium());
+    // ;
     // }
+    // for (HomePolicy tempHomePolicy : homePolicies) {
+    //   System.out.println(tempHomePolicy.getBasePremium());
+    //   ;
+    // }
+
+    for (String tempLifeUser : LifeUsers) {
+      System.out.println(tempLifeUser);
+    }
   }
 }

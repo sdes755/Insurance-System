@@ -138,11 +138,37 @@ public class Profiles {
     }
   }
 
-  public ArrayList<String> getList() {
-    return loadedUsers;
+  public String loadedUser() {
+    if(loadedUsersAge.size()==1){
+      return loadedUsers.get(0);
+    }else{
+      return "";
+    }
   }
 
-  public ArrayList<Integer> getList2() {
-    return loadedUsersAge;
+  public int loadAge() {
+    if(loadedUsersAge.size()==1){
+      return loadedUsersAge.get(0);
+    }else{
+      return 0;
+    }
+    
+    
+  }
+
+  public int NumPolicies(ArrayList<String> Car, ArrayList<String> Life, ArrayList<String> Home) {
+    int num = 0;
+    for (int i = 0; i < Car.size(); i++) {
+      if ((Car.get(i)).equals(loadedUsers.get(0))) {
+        num++;
+      }
+      if ((Life.get(i)).equals(loadedUsers.get(0))) {
+        num++;
+      }
+      if ((Home.get(i)).equals(loadedUsers.get(0))) {
+        num++;
+      }
+    }
+    return num;
   }
 }

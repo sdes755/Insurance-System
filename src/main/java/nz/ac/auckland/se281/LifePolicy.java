@@ -17,12 +17,8 @@ public class LifePolicy extends Policies {
 
   @Override
   public int setBasePremium() {
-    if (age > 100) {
-      MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(userName);
-    } else {
-      basePremium = (int) (sumInsured * 0.01 * (1 + (age / 100)));
-      MessageCli.NEW_POLICY_CREATED.printMessage("life", userName);
-    }
+    basePremium = (int) (sumInsured * 0.01 * (1 + (age / 100)));
+    MessageCli.NEW_POLICY_CREATED.printMessage("life", userName);
     return basePremium;
   }
 }
