@@ -2,14 +2,15 @@ package nz.ac.auckland.se281;
 
 public abstract class Policies {
 
-  private int sumInsured;
+  protected int sumInsured;
   private int basePremium;
-  private String userName;
+  protected String userName;
+  protected int age;
 
-  public Policies(String[] options, int basePremium, String userName) {
+  public Policies(String[] options, String userName, int age) {
     this.sumInsured = Integer.parseInt(options[0]);
-    this.basePremium = basePremium;
     this.userName = userName;
+    this.age = age;
     setBasePremium();
   }
 

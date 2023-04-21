@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
 import nz.ac.auckland.se281.Main.PolicyType;
 
 public class InsuranceSystem {
@@ -64,5 +65,22 @@ public class InsuranceSystem {
     profiles.profileDelete(correctUser);
   }
 
-  public void createPolicy(PolicyType type, String[] options) {}
+  public void createPolicy(PolicyType type, String[] options) {
+    ArrayList<String> loadedUsers = profiles.getList();
+    ArrayList<Integer> loadedUsersAge = profiles.getList2();
+    String user = loadedUsers.get(0);
+    int age = loadedUsersAge.get(0);
+
+    if (loadedUsers.size() == 1) {
+      if (type == PolicyType.CAR) {
+        CarPolicy car = new CarPolicy(options, user, age);
+      } else if (type == PolicyType.HOME) {
+        HomePolicy home = new HomePolicy(options, user, age);
+      } else if (type == PolicyType.LIFE) {
+        LifePolicy life = new LifePolicy(options, user, age);
+      }
+    } else {
+      MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(user);
+    }
+  }
 }
