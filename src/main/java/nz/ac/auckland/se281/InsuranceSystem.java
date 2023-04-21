@@ -11,6 +11,10 @@ public class InsuranceSystem {
 
   Profiles profiles = new Profiles();
 
+  ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
+  ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
+  ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
+
   public void printDatabase() {
     // Initialising a number variable for the for print-db statements using the method in Profiles
     // class
@@ -69,18 +73,25 @@ public class InsuranceSystem {
     ArrayList<String> loadedUsers = profiles.getList();
     ArrayList<Integer> loadedUsersAge = profiles.getList2();
     String user = loadedUsers.get(0);
-    int age = loadedUsersAge.get(0);
+    double age = loadedUsersAge.get(0);
 
     if (loadedUsers.size() == 1) {
       if (type == PolicyType.CAR) {
         CarPolicy car = new CarPolicy(options, user, age);
+
       } else if (type == PolicyType.HOME) {
         HomePolicy home = new HomePolicy(options, user, age);
+        homePolicies.add(home);
       } else if (type == PolicyType.LIFE) {
         LifePolicy life = new LifePolicy(options, user, age);
+        lifePolicies.add(life);
       }
     } else {
       MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(user);
+    }
+    for (LifePolicy tempLifePolicy : lifePolicies) {
+      System.out.println(tempLifePolicy.getBasePremium());
+      ;
     }
   }
 }
