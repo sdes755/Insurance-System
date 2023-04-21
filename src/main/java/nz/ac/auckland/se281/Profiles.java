@@ -138,16 +138,6 @@ public class Profiles {
     }
   }
 
-  public int loadProfCheck() {
-    int truth = 0;
-    if (loadedUsers.size() == 1) {
-      truth = 1;
-    } else {
-      truth = 0;
-    }
-    return truth;
-  }
-
   public ArrayList<String> getList() {
     return loadedUsers;
   }
