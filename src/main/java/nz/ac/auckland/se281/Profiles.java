@@ -148,27 +148,6 @@ public class Profiles {
     return truth;
   }
 
-  /*  public String userLoaded() {
-      if (loadedUsers.size() == 1) {
-        return loadedUsers.get(0);
-      }
-      return null;
-    }
-
-    public void userloadAge() {
-
-      String user = loadedUsers.get(0);
-      int profileIndex = 5;
-
-      for (int i = 0; i < Usernames.size(); i++) {
-
-        if (user.equals(Usernames.get(i))) {
-          profileIndex = i;
-        }
-      }
-      loadedUsersAge.add(profileIndex);
-    }
-  */
   public ArrayList<String> getList() {
     return loadedUsers;
   }
