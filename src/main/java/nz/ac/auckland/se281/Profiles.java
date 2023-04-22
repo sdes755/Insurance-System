@@ -38,20 +38,71 @@ public class Profiles {
   }
   // Creating a new method to count the number of profiles in the database
   public void printProfiles(ArrayList<String> Car, ArrayList<String> Life, ArrayList<String> Home) {
-
+    ArrayList<Integer> numPolicies = new ArrayList<Integer>();
     int num = Usernames.size();
     int loadnum = loadedUsers.size();
     int rank = 1;
-    // Using a for loop to run through each element in the array list and printing it out one by one
-    // in the database
-    
+
+    for (int i = 0; i < num; i++) {
+      int counter = 0;
+      if (Car.contains(Usernames.get(i)) && Car.size() != 0) {
+        counter++;
+      }
+      if (Life.contains(Usernames.get(i)) && Life.size() != 0) {
+        counter++;
+      }
+      if (Home.contains(Usernames.get(i)) && Home.size() != 0) {
+        counter++;
+      }
+      if (counter == 0) {
+        counter = 0;
+      }
+
+      numPolicies.add(counter);
+    }
+
     for (int i = 0; i < num; i++) {
       if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
-        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
-            "*** ", Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
+        if (numPolicies.get(i) == 1) {
+          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+              "*** ",
+              Integer.toString(rank),
+              Usernames.get(i),
+              Integer.toString(Ages.get(i)),
+              Integer.toString(numPolicies.get(i)),
+              "y");
+        } else {
+          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+              "*** ",
+              Integer.toString(rank),
+              Usernames.get(i),
+              Integer.toString(Ages.get(i)),
+              Integer.toString(numPolicies.get(i)),
+              "ies");
+        }
+
+        // MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
+        //     "*** ", Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       } else {
-        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-            Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
+        if (numPolicies.get(i) == 1) {
+          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+              "",
+              Integer.toString(rank),
+              Usernames.get(i),
+              Integer.toString(Ages.get(i)),
+              Integer.toString(numPolicies.get(i)),
+              "y");
+        } else {
+          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+              "",
+              Integer.toString(rank),
+              Usernames.get(i),
+              Integer.toString(Ages.get(i)),
+              Integer.toString(numPolicies.get(i)),
+              "ies");
+        }
+        // MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
+        //     Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       }
       rank = rank + 1;
     }
@@ -154,5 +205,4 @@ public class Profiles {
       return 0;
     }
   }
-
 }
