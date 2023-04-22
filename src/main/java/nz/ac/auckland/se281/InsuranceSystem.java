@@ -10,14 +10,6 @@ public class InsuranceSystem {
 
   Profiles profiles = new Profiles();
 
-  // ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
-  // ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
-  // ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
-
-  // ArrayList<String> carUsers = new ArrayList<String>();
-  // ArrayList<String> homeUsers = new ArrayList<String>();
-  // ArrayList<String> lifeUsers = new ArrayList<String>();
-
   public void printDatabase() {
     // Initialising a number variable for the for print-db statements using the method in Profiles
     // class
@@ -76,47 +68,5 @@ public class InsuranceSystem {
   public void createPolicy(PolicyType type, String[] options) {
 
     profiles.storePolicy(type, options);
-
-    // String user = profiles.loadedUser();
-    // int age = profiles.loadAge();
-    // if (age != 0) {
-    //   if (type == PolicyType.CAR) {
-    //     CarPolicy car = new CarPolicy(options, user, age);
-    //     carPolicies.add(car);
-    //     carUsers.add(user);
-    //   } else if (type == PolicyType.HOME) {
-    //     HomePolicy home = new HomePolicy(options, user, age);
-    //     homePolicies.add(home);
-    //     homeUsers.add(user);
-    //   } else if (type == PolicyType.LIFE && age < 100 && lifeUsers.contains(user) == false) {
-    //     LifePolicy life = new LifePolicy(options, user, age);
-    //     lifePolicies.add(life);
-    //     lifeUsers.add(user);
-    //   } else if (type == PolicyType.LIFE && age > 100) {
-    //     MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
-    //   } else if (type == PolicyType.LIFE && lifeUsers.contains(user) == true) {
-    //     MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(user);
-    //   }
-    // } else {
-    //   MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
-    // }
-
-    // for (LifePolicy tempLifePolicy : lifePolicies) {
-    //   System.out.println(tempLifePolicy.getBasePremium());
-    // }
-    // for (CarPolicy tempCarPolicy : carPolicies) {
-    //   System.out.println(tempCarPolicy.getMakeModel());
-    // }
-    // for (HomePolicy tempHomePolicy : homePolicies) {
-    //   System.out.println(tempHomePolicy.getBasePremium());
-    //   ;
-    // }
-
-    // for (String tempLifeUser : LifeUsers) {
-    //   System.out.println(tempLifeUser);
-    // }
-    // for (String tempCarUser : CarUsers) {
-    //   System.out.println(tempCarUser);
-    // }
   }
 }
