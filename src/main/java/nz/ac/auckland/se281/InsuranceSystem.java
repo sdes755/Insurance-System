@@ -1,6 +1,5 @@
 package nz.ac.auckland.se281;
 
-import java.util.ArrayList;
 import nz.ac.auckland.se281.Main.PolicyType;
 
 public class InsuranceSystem {
@@ -11,13 +10,13 @@ public class InsuranceSystem {
 
   Profiles profiles = new Profiles();
 
-  ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
-  ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
-  ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
+  // ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
+  // ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
+  // ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
 
-  ArrayList<String> CarUsers = new ArrayList<String>();
-  ArrayList<String> HomeUsers = new ArrayList<String>();
-  ArrayList<String> LifeUsers = new ArrayList<String>();
+  // ArrayList<String> carUsers = new ArrayList<String>();
+  // ArrayList<String> homeUsers = new ArrayList<String>();
+  // ArrayList<String> lifeUsers = new ArrayList<String>();
 
   public void printDatabase() {
     // Initialising a number variable for the for print-db statements using the method in Profiles
@@ -33,7 +32,7 @@ public class InsuranceSystem {
     }
     // After the header line gets printed, we print the databse using the method made in profiles
     // class
-    profiles.printProfiles(CarUsers, HomeUsers, LifeUsers);
+    profiles.printProfiles();
     ;
   }
 
@@ -76,34 +75,38 @@ public class InsuranceSystem {
 
   public void createPolicy(PolicyType type, String[] options) {
 
-    String user = profiles.loadedUser();
-    int age = profiles.loadAge();
-    if (age != 0) {
-      if (type == PolicyType.CAR) {
-        CarPolicy car = new CarPolicy(options, user, age);
-        carPolicies.add(car);
-        CarUsers.add(user);
-      } else if (type == PolicyType.HOME) {
-        HomePolicy home = new HomePolicy(options, user, age);
-        homePolicies.add(home);
-        HomeUsers.add(user);
-      } else if (type == PolicyType.LIFE && age < 100) {
-        LifePolicy life = new LifePolicy(options, user, age);
-        lifePolicies.add(life);
-        LifeUsers.add(user);
-      } else if (type == PolicyType.LIFE && age > 100) {
-        MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
-      }
-    } else {
-      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
-    }
+    profiles.storePolicy(type, options);
+
+    // String user = profiles.loadedUser();
+    // int age = profiles.loadAge();
+    // if (age != 0) {
+    //   if (type == PolicyType.CAR) {
+    //     CarPolicy car = new CarPolicy(options, user, age);
+    //     carPolicies.add(car);
+    //     carUsers.add(user);
+    //   } else if (type == PolicyType.HOME) {
+    //     HomePolicy home = new HomePolicy(options, user, age);
+    //     homePolicies.add(home);
+    //     homeUsers.add(user);
+    //   } else if (type == PolicyType.LIFE && age < 100 && lifeUsers.contains(user) == false) {
+    //     LifePolicy life = new LifePolicy(options, user, age);
+    //     lifePolicies.add(life);
+    //     lifeUsers.add(user);
+    //   } else if (type == PolicyType.LIFE && age > 100) {
+    //     MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
+    //   } else if (type == PolicyType.LIFE && lifeUsers.contains(user) == true) {
+    //     MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(user);
+    //   }
+    // } else {
+    //   MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
+    // }
 
     // for (LifePolicy tempLifePolicy : lifePolicies) {
     //   System.out.println(tempLifePolicy.getBasePremium());
     // }
-    for (CarPolicy tempCarPolicy : carPolicies) {
-      System.out.println(tempCarPolicy.getMakeModel());
-    }
+    // for (CarPolicy tempCarPolicy : carPolicies) {
+    //   System.out.println(tempCarPolicy.getMakeModel());
+    // }
     // for (HomePolicy tempHomePolicy : homePolicies) {
     //   System.out.println(tempHomePolicy.getBasePremium());
     //   ;
@@ -112,8 +115,8 @@ public class InsuranceSystem {
     // for (String tempLifeUser : LifeUsers) {
     //   System.out.println(tempLifeUser);
     // }
-    for (String tempCarUser : CarUsers) {
-      System.out.println(tempCarUser);
-    }
+    // for (String tempCarUser : CarUsers) {
+    //   System.out.println(tempCarUser);
+    // }
   }
 }

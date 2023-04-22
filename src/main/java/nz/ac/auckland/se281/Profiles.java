@@ -1,6 +1,8 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import nz.ac.auckland.se281.Main.PolicyType;
 
 public class Profiles {
   // Crecating two array lists for Usernames and the Ages to be stored in
@@ -11,6 +13,14 @@ public class Profiles {
   private ArrayList<String> loadedUsers = new ArrayList<String>();
 
   private ArrayList<Integer> loadedUsersAge = new ArrayList<Integer>();
+
+  private ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
+  private ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
+  private ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
+
+  private ArrayList<String> carUsers = new ArrayList<String>();
+  private ArrayList<String> homeUsers = new ArrayList<String>();
+  private ArrayList<String> lifeUsers = new ArrayList<String>();
 
   // Creating a method to store the Usernames and Ages in the array lists
   public void addUserAges(String userName, int age) {
@@ -37,30 +47,31 @@ public class Profiles {
     }
   }
   // Creating a new method to count the number of profiles in the database
-  public void printProfiles(ArrayList<String> Car, ArrayList<String> Life, ArrayList<String> Home) {
+  public void printProfiles() {
     ArrayList<Integer> numPolicies = new ArrayList<Integer>();
     int num = Usernames.size();
     int loadnum = loadedUsers.size();
     int rank = 1;
 
+    // Getting the number of policies for each user
     for (int i = 0; i < num; i++) {
       int counter = 0;
-      if (Car.contains(Usernames.get(i)) && Car.size() != 0) {
-        counter++;
+      if (carUsers.contains(Usernames.get(i)) && carUsers.size() != 0) {
+        counter = counter + Collections.frequency(carUsers, Usernames.get(i));
       }
-      if (Life.contains(Usernames.get(i)) && Life.size() != 0) {
-        counter++;
+      if (lifeUsers.contains(Usernames.get(i)) && lifeUsers.size() != 0) {
+        counter = counter + Collections.frequency(lifeUsers, Usernames.get(i));
       }
-      if (Home.contains(Usernames.get(i)) && Home.size() != 0) {
-        counter++;
+      if (homeUsers.contains(Usernames.get(i)) && homeUsers.size() != 0) {
+        counter = counter + Collections.frequency(homeUsers, Usernames.get(i));
       }
       if (counter == 0) {
-        counter = 0;
+        counter = counter;
       }
 
       numPolicies.add(counter);
     }
-
+    // Printing
     for (int i = 0; i < num; i++) {
       if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
         if (numPolicies.get(i) == 1) {
@@ -203,6 +214,32 @@ public class Profiles {
       return loadedUsersAge.get(0);
     } else {
       return 0;
+    }
+  }
+
+  public void storePolicy(PolicyType type, String[] options) {
+    String user = loadedUser();
+    int age = loadAge();
+    if (age != 0) {
+      if (type == PolicyType.CAR) {
+        CarPolicy car = new CarPolicy(options, user, age);
+        carPolicies.add(car);
+        carUsers.add(user);
+      } else if (type == PolicyType.HOME) {
+        HomePolicy home = new HomePolicy(options, user, age);
+        homePolicies.add(home);
+        homeUsers.add(user);
+      } else if (type == PolicyType.LIFE && age < 100 && lifeUsers.contains(user) == false) {
+        LifePolicy life = new LifePolicy(options, user, age);
+        lifePolicies.add(life);
+        lifeUsers.add(user);
+      } else if (type == PolicyType.LIFE && age > 100) {
+        MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
+      } else if (type == PolicyType.LIFE && lifeUsers.contains(user) == true) {
+        MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(user);
+      }
+    } else {
+      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
     }
   }
 }
