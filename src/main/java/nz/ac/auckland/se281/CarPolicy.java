@@ -35,7 +35,7 @@ public class CarPolicy extends Policies {
   @Override
   public int setBasePremium() {
     double baseP;
-    if (age > 25) {
+    if (age > 24) {
       baseP = 0.1 * sumInsured;
     } else {
       baseP = 0.15 * sumInsured;

@@ -75,6 +75,27 @@ public class Profiles {
         if (numPolicies.get(i) == 1) {
 
           if (numPolicies.get(i) == 1) {
+
+            int Discount = 0;
+
+            for (LifePolicy life : lifePolicies) {
+              if (life.getUser().equals(Usernames.get(i))) {
+                Discount = Discount + life.getBasePremium();
+              }
+            }
+
+            for (CarPolicy car : carPolicies) {
+              if (car.getUser().equals(Usernames.get(i))) {
+                Discount = Discount + car.getBasePremium();
+              }
+            }
+
+            for (HomePolicy home : homePolicies) {
+              if (home.getUser().equals(Usernames.get(i))) {
+                Discount = Discount + home.getBasePremium();
+              }
+            }
+
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
                 "*** ",
                 Integer.toString(rank),
@@ -82,7 +103,7 @@ public class Profiles {
                 Integer.toString(Ages.get(i)),
                 Integer.toString(numPolicies.get(i)),
                 "y",
-                "0");
+                Integer.toString(Discount));
             for (LifePolicy life : lifePolicies) {
               if (life.getUser().equals(Usernames.get(i))) {
                 MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
@@ -91,7 +112,7 @@ public class Profiles {
                     Integer.toString(life.getBasePremium()));
               }
             }
-  
+
             for (CarPolicy car : carPolicies) {
               if (car.getUser().equals(Usernames.get(i))) {
                 MessageCli.PRINT_DB_CAR_POLICY.printMessage(
@@ -101,7 +122,7 @@ public class Profiles {
                     Integer.toString(car.getBasePremium()));
               }
             }
-  
+
             for (HomePolicy home : homePolicies) {
               if (home.getUser().equals(Usernames.get(i))) {
                 MessageCli.PRINT_DB_HOME_POLICY.printMessage(
@@ -111,7 +132,6 @@ public class Profiles {
                     Integer.toString(home.getBasePremium()));
               }
             }
-          
           }
 
         } else {
@@ -252,6 +272,26 @@ public class Profiles {
 
       } else {
         if (numPolicies.get(i) == 1) {
+          int Discount = 0;
+
+          for (LifePolicy life : lifePolicies) {
+            if (life.getUser().equals(Usernames.get(i))) {
+              Discount = Discount + life.getBasePremium();
+            }
+          }
+
+          for (CarPolicy car : carPolicies) {
+            if (car.getUser().equals(Usernames.get(i))) {
+              Discount = Discount + car.getBasePremium();
+            }
+          }
+
+          for (HomePolicy home : homePolicies) {
+            if (home.getUser().equals(Usernames.get(i))) {
+              Discount = Discount + home.getBasePremium();
+            }
+          }
+
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
               "",
               Integer.toString(rank),
@@ -259,7 +299,8 @@ public class Profiles {
               Integer.toString(Ages.get(i)),
               Integer.toString(numPolicies.get(i)),
               "y",
-              "0");
+              Integer.toString(Discount));
+
           for (LifePolicy life : lifePolicies) {
             if (life.getUser().equals(Usernames.get(i))) {
               MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
@@ -424,6 +465,7 @@ public class Profiles {
           }
         }
       }
+      rank = rank + 1;
     }
   }
 
