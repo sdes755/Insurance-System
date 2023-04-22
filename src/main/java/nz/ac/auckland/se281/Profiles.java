@@ -37,13 +37,14 @@ public class Profiles {
     }
   }
   // Creating a new method to count the number of profiles in the database
-  public void printProfiles() {
+  public void printProfiles(ArrayList<String> Car, ArrayList<String> Life, ArrayList<String> Home) {
 
     int num = Usernames.size();
     int loadnum = loadedUsers.size();
     int rank = 1;
     // Using a for loop to run through each element in the array list and printing it out one by one
     // in the database
+    
     for (int i = 0; i < num; i++) {
       if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
         MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
@@ -139,36 +140,19 @@ public class Profiles {
   }
 
   public String loadedUser() {
-    if(loadedUsersAge.size()==1){
+    if (loadedUsersAge.size() == 1) {
       return loadedUsers.get(0);
-    }else{
+    } else {
       return "";
     }
   }
 
   public int loadAge() {
-    if(loadedUsersAge.size()==1){
+    if (loadedUsersAge.size() == 1) {
       return loadedUsersAge.get(0);
-    }else{
+    } else {
       return 0;
     }
-    
-    
   }
 
-  public int NumPolicies(ArrayList<String> Car, ArrayList<String> Life, ArrayList<String> Home) {
-    int num = 0;
-    for (int i = 0; i < Car.size(); i++) {
-      if ((Car.get(i)).equals(loadedUsers.get(0))) {
-        num++;
-      }
-      if ((Life.get(i)).equals(loadedUsers.get(0))) {
-        num++;
-      }
-      if ((Home.get(i)).equals(loadedUsers.get(0))) {
-        num++;
-      }
-    }
-    return num;
-  }
 }

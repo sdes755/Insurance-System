@@ -33,8 +33,8 @@ public class InsuranceSystem {
     }
     // After the header line gets printed, we print the databse using the method made in profiles
     // class
-    profiles.printProfiles();
-    profiles.NumPolicies(CarUsers, LifeUsers, HomeUsers);
+    profiles.printProfiles(CarUsers, HomeUsers, LifeUsers);
+    ;
   }
 
   public void createNewProfile(String userName, String age) {
@@ -98,21 +98,22 @@ public class InsuranceSystem {
       MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
     }
 
-    for (LifePolicy tempLifePolicy : lifePolicies) {
-      System.out.println(tempLifePolicy.getBasePremium());
-      ;
-    }
-    // for (CarPolicy tempCarPolicy : carPolicies) {
-    // System.out.println(tempCarPolicy.getBasePremium());
-    // ;
+    // for (LifePolicy tempLifePolicy : lifePolicies) {
+    //   System.out.println(tempLifePolicy.getBasePremium());
     // }
+    for (CarPolicy tempCarPolicy : carPolicies) {
+      System.out.println(tempCarPolicy.getMakeModel());
+    }
     // for (HomePolicy tempHomePolicy : homePolicies) {
     //   System.out.println(tempHomePolicy.getBasePremium());
     //   ;
     // }
 
-    for (String tempLifeUser : LifeUsers) {
-      System.out.println(tempLifeUser);
+    // for (String tempLifeUser : LifeUsers) {
+    //   System.out.println(tempLifeUser);
+    // }
+    for (String tempCarUser : CarUsers) {
+      System.out.println(tempCarUser);
     }
   }
 }
