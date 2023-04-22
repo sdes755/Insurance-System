@@ -7,11 +7,9 @@ import nz.ac.auckland.se281.Main.PolicyType;
 public class Profiles {
   // Crecating two array lists for Usernames and the Ages to be stored in
   private ArrayList<String> Usernames = new ArrayList<String>();
-
   private ArrayList<Integer> Ages = new ArrayList<Integer>();
 
   private ArrayList<String> loadedUsers = new ArrayList<String>();
-
   private ArrayList<Integer> loadedUsersAge = new ArrayList<Integer>();
 
   private ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
@@ -53,6 +51,10 @@ public class Profiles {
     int loadnum = loadedUsers.size();
     int rank = 1;
 
+    // for(LifePolicy life : lifePolicies) {
+    //   life.getUser();
+    // }
+
     // Getting the number of policies for each user
     for (int i = 0; i < num; i++) {
       int counter = 0;
@@ -75,35 +77,102 @@ public class Profiles {
     for (int i = 0; i < num; i++) {
       if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
         if (numPolicies.get(i) == 1) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
-              "*** ",
-              Integer.toString(rank),
-              Usernames.get(i),
-              Integer.toString(Ages.get(i)),
-              Integer.toString(numPolicies.get(i)),
-              "y");
+
+          for (LifePolicy life : lifePolicies) {
+            if (life.getUser().equals(Usernames.get(i))) {
+              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                  "*** ",
+                  Integer.toString(rank),
+                  Usernames.get(i),
+                  Integer.toString(Ages.get(i)),
+                  Integer.toString(numPolicies.get(i)),
+                  "y");
+              MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                  Integer.toString(life.getSumInsured()),
+                  Integer.toString(life.getBasePremium()),
+                  Integer.toString(life.getBasePremium()));
+            }
+          }
+
+          for (CarPolicy car : carPolicies) {
+            if (car.getUser().equals(Usernames.get(i))) {
+              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                  "*** ",
+                  Integer.toString(rank),
+                  Usernames.get(i),
+                  Integer.toString(Ages.get(i)),
+                  Integer.toString(numPolicies.get(i)),
+                  "y");
+              MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                  car.getMakeModel(),
+                  Integer.toString(car.getSumInsured()),
+                  Integer.toString(car.getBasePremium()),
+                  Integer.toString(car.getBasePremium()));
+            }
+          }
+          for (HomePolicy home : homePolicies) {
+            if (home.getUser().equals(Usernames.get(i))) {
+              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                  "*** ",
+                  Integer.toString(rank),
+                  Usernames.get(i),
+                  Integer.toString(Ages.get(i)),
+                  Integer.toString(numPolicies.get(i)),
+                  "y");
+              MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                  home.getAddress(),
+                  Integer.toString(home.getSumInsured()),
+                  Integer.toString(home.getBasePremium()),
+                  Integer.toString(home.getBasePremium()));
+            }
+          }
+          // MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+          //     "*** ",
+          //     Integer.toString(rank),
+          //     Usernames.get(i),
+          //     Integer.toString(Ages.get(i)),
+          //     Integer.toString(numPolicies.get(i)),
+          //     "y");
         } else {
-          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
-              "*** ",
-              Integer.toString(rank),
-              Usernames.get(i),
-              Integer.toString(Ages.get(i)),
-              Integer.toString(numPolicies.get(i)),
-              "ies");
+
+          // MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+          //     "*** ",
+          //     Integer.toString(rank),
+          //     Usernames.get(i),
+          //     Integer.toString(Ages.get(i)),
+          //     Integer.toString(numPolicies.get(i)),
+          //     "ies");
         }
 
         // MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
         //     "*** ", Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       } else {
         if (numPolicies.get(i) == 1) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
-              "",
-              Integer.toString(rank),
-              Usernames.get(i),
-              Integer.toString(Ages.get(i)),
-              Integer.toString(numPolicies.get(i)),
-              "y");
+          for (LifePolicy life : lifePolicies) {
+            if (life.getUser().equals(Usernames.get(i))) {
+              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                  "*** ",
+                  Integer.toString(rank),
+                  Usernames.get(i),
+                  Integer.toString(Ages.get(i)),
+                  Integer.toString(numPolicies.get(i)),
+                  "y");
+              MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                  Integer.toString(life.getSumInsured()),
+                  Integer.toString(life.getBasePremium()),
+                  Integer.toString(life.getBasePremium()));
+            }
+          }
+
+          // MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
+          //     "",
+          //     Integer.toString(rank),
+          //     Usernames.get(i),
+          //     Integer.toString(Ages.get(i)),
+          //     Integer.toString(numPolicies.get(i)),
+          //     "y");
         } else {
+
           MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
               "",
               Integer.toString(rank),
@@ -241,5 +310,10 @@ public class Profiles {
     } else {
       MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
     }
+
+    for (LifePolicy tempLifePolicy : lifePolicies) {
+      System.out.println(tempLifePolicy.getBasePremium());
+    }
+    // }
   }
 }

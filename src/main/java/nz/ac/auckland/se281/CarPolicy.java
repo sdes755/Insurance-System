@@ -16,6 +16,10 @@ public class CarPolicy extends Policies {
     setBasePremium();
   }
 
+  public String getUser() {
+    return userName;
+  }
+
   public String getMakeModel() {
     return makeModel;
   }
@@ -41,7 +45,6 @@ public class CarPolicy extends Policies {
     } else {
       basePremium = (int) baseP;
     }
-    // System.out.println(basePremium);
     MessageCli.NEW_POLICY_CREATED.printMessage("car", userName);
     return basePremium;
   }

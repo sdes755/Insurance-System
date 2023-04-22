@@ -16,6 +16,10 @@ public class HomePolicy extends Policies {
     setBasePremium();
   }
 
+  public String getUser() {
+    return userName;
+  }
+
   public String getAddress() {
     return address;
   }
@@ -37,7 +41,6 @@ public class HomePolicy extends Policies {
       basePremium = (int) (sumInsured * 0.01);
     }
     MessageCli.NEW_POLICY_CREATED.printMessage("home", userName);
-    System.out.println(basePremium);
     return basePremium;
   }
 }

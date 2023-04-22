@@ -7,6 +7,10 @@ public class LifePolicy extends Policies {
     setBasePremium();
   }
 
+  public String getUser(){
+    return userName;
+  }
+
   public int getSumInsured() {
     return sumInsured;
   }
