@@ -51,10 +51,6 @@ public class Profiles {
     int loadnum = loadedUsers.size();
     int rank = 1;
 
-    // for(LifePolicy life : lifePolicies) {
-    //   life.getUser();
-    // }
-
     // Getting the number of policies for each user
     for (int i = 0; i < num; i++) {
       int counter = 0;
@@ -129,95 +125,106 @@ public class Profiles {
           }
 
         } else {
-          for (LifePolicy life : lifePolicies) {
-            if (life.getUser().equals(Usernames.get(i))) {
-              double discount;
-              int Discount;
-              if (numPolicies.get(i) < 3) {
-                discount = life.getBasePremium() * 0.9;
-                Discount = (int) discount;
-              } else {
-                discount = life.getBasePremium() * 0.8;
-                Discount = (int) discount;
+          if (numPolicies.get(i) != 0) {
+            for (LifePolicy life : lifePolicies) {
+              if (life.getUser().equals(Usernames.get(i))) {
+                double discount;
+                int Discount;
+                if (numPolicies.get(i) < 3) {
+                  discount = life.getBasePremium() * 0.9;
+                  Discount = (int) discount;
+                } else {
+                  discount = life.getBasePremium() * 0.8;
+                  Discount = (int) discount;
+                }
+                MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                    "*** ",
+                    Integer.toString(rank),
+                    Usernames.get(i),
+                    Integer.toString(Ages.get(i)),
+                    Integer.toString(numPolicies.get(i)),
+                    "ies",
+                    Integer.toString(Discount));
+                MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                    Integer.toString(life.getSumInsured()),
+                    Integer.toString(life.getBasePremium()),
+                    Integer.toString(Discount));
               }
-              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-                  "*** ",
-                  Integer.toString(rank),
-                  Usernames.get(i),
-                  Integer.toString(Ages.get(i)),
-                  Integer.toString(numPolicies.get(i)),
-                  "ies",
-                  Integer.toString(Discount));
-              MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
-                  Integer.toString(life.getSumInsured()),
-                  Integer.toString(life.getBasePremium()),
-                  Integer.toString(Discount));
             }
-          }
 
-          for (CarPolicy car : carPolicies) {
-            if (car.getUser().equals(Usernames.get(i))) {
-              double discount;
-              int Discount;
-              if (numPolicies.get(i) < 3) {
-                discount = car.getBasePremium() * 0.9;
-                Discount = (int) discount;
-              } else {
-                discount = car.getBasePremium() * 0.8;
-                Discount = (int) discount;
+            for (CarPolicy car : carPolicies) {
+              if (car.getUser().equals(Usernames.get(i))) {
+                double discount;
+                int Discount;
+                if (numPolicies.get(i) < 3) {
+                  discount = car.getBasePremium() * 0.9;
+                  Discount = (int) discount;
+                } else {
+                  discount = car.getBasePremium() * 0.8;
+                  Discount = (int) discount;
+                }
+                MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                    "*** ",
+                    Integer.toString(rank),
+                    Usernames.get(i),
+                    Integer.toString(Ages.get(i)),
+                    Integer.toString(numPolicies.get(i)),
+                    "ies",
+                    Integer.toString(Discount));
+                MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                    car.getMakeModel(),
+                    Integer.toString(car.getSumInsured()),
+                    Integer.toString(car.getBasePremium()),
+                    Integer.toString(Discount));
               }
-              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-                  "*** ",
-                  Integer.toString(rank),
-                  Usernames.get(i),
-                  Integer.toString(Ages.get(i)),
-                  Integer.toString(numPolicies.get(i)),
-                  "ies",
-                  Integer.toString(Discount));
-              MessageCli.PRINT_DB_CAR_POLICY.printMessage(
-                  car.getMakeModel(),
-                  Integer.toString(car.getSumInsured()),
-                  Integer.toString(car.getBasePremium()),
-                  Integer.toString(Discount));
             }
-          }
 
-          for (HomePolicy home : homePolicies) {
-            if (home.getUser().equals(Usernames.get(i))) {
-              double discount;
-              int Discount;
-              if (numPolicies.get(i) < 3) {
-                discount = home.getBasePremium() * 0.9;
-                Discount = (int) discount;
-              } else {
-                discount = home.getBasePremium() * 0.8;
-                Discount = (int) discount;
+            for (HomePolicy home : homePolicies) {
+              if (home.getUser().equals(Usernames.get(i))) {
+                double discount;
+                int Discount;
+                if (numPolicies.get(i) < 3) {
+                  discount = home.getBasePremium() * 0.9;
+                  Discount = (int) discount;
+                } else {
+                  discount = home.getBasePremium() * 0.8;
+                  Discount = (int) discount;
+                }
+                MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                    "*** ",
+                    Integer.toString(rank),
+                    Usernames.get(i),
+                    Integer.toString(Ages.get(i)),
+                    Integer.toString(numPolicies.get(i)),
+                    "ies",
+                    Integer.toString(Discount));
+                MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                    home.getAddress(),
+                    Integer.toString(home.getSumInsured()),
+                    Integer.toString(home.getBasePremium()),
+                    Integer.toString(Discount));
               }
-              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-                  "*** ",
-                  Integer.toString(rank),
-                  Usernames.get(i),
-                  Integer.toString(Ages.get(i)),
-                  Integer.toString(numPolicies.get(i)),
-                  "ies",
-                  Integer.toString(Discount));
-              MessageCli.PRINT_DB_HOME_POLICY.printMessage(
-                  home.getAddress(),
-                  Integer.toString(home.getSumInsured()),
-                  Integer.toString(home.getBasePremium()),
-                  Integer.toString(Discount));
             }
+
+          } else {
+
+            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                "*** ",
+                Integer.toString(rank),
+                Usernames.get(i),
+                Integer.toString(Ages.get(i)),
+                Integer.toString(numPolicies.get(i)),
+                "ies",
+                "0");
           }
         }
 
-        // MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
-        //     "*** ", Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       } else {
         if (numPolicies.get(i) == 1) {
           for (LifePolicy life : lifePolicies) {
             if (life.getUser().equals(Usernames.get(i))) {
               MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-                  "*** ",
+                  "",
                   Integer.toString(rank),
                   Usernames.get(i),
                   Integer.toString(Ages.get(i)),
@@ -230,27 +237,170 @@ public class Profiles {
             }
           }
 
-          // MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
-          //     "",
-          //     Integer.toString(rank),
-          //     Usernames.get(i),
-          //     Integer.toString(Ages.get(i)),
-          //     Integer.toString(numPolicies.get(i)),
-          //     "y");
-        } else {
+          for (CarPolicy car : carPolicies) {
+            if (car.getUser().equals(Usernames.get(i))) {
+              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                  "",
+                  Integer.toString(rank),
+                  Usernames.get(i),
+                  Integer.toString(Ages.get(i)),
+                  Integer.toString(numPolicies.get(i)),
+                  "y");
+              MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                  car.getMakeModel(),
+                  Integer.toString(car.getSumInsured()),
+                  Integer.toString(car.getBasePremium()),
+                  Integer.toString(car.getBasePremium()));
+            }
+          }
 
-          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage(
-              "",
-              Integer.toString(rank),
-              Usernames.get(i),
-              Integer.toString(Ages.get(i)),
-              Integer.toString(numPolicies.get(i)),
-              "ies");
+          for (HomePolicy home : homePolicies) {
+            if (home.getUser().equals(Usernames.get(i))) {
+              MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                  "",
+                  Integer.toString(rank),
+                  Usernames.get(i),
+                  Integer.toString(Ages.get(i)),
+                  Integer.toString(numPolicies.get(i)),
+                  "y");
+              MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                  home.getAddress(),
+                  Integer.toString(home.getSumInsured()),
+                  Integer.toString(home.getBasePremium()),
+                  Integer.toString(home.getBasePremium()));
+            }
+          }
+
+        } else {
+          if (numPolicies.get(i) != 0) {
+            int Discount = 0;
+
+            for (LifePolicy life : lifePolicies) {
+              if (life.getUser().equals(Usernames.get(i))) {
+                double discountlife;
+                int LifeDiscount;
+                if (numPolicies.get(i) < 3) {
+                  discountlife = life.getBasePremium() * 0.9;
+                  Discount = (int) discountlife;
+                } else {
+                  discountlife = life.getBasePremium() * 0.8;
+                  LifeDiscount = (int) discountlife;
+                  Discount = Discount + (int) discountlife;
+                }
+              }
+            }
+
+            for (CarPolicy car : carPolicies) {
+              if (car.getUser().equals(Usernames.get(i))) {
+                double discountcar;
+                int CarDiscount;
+                if (numPolicies.get(i) < 3) {
+                  discountcar = car.getBasePremium() * 0.9;
+                  Discount = (int) discountcar;
+                } else {
+                  discountcar = car.getBasePremium() * 0.8;
+                  CarDiscount = (int) discountcar;
+                  Discount = Discount + (int) discountcar;
+                }
+              }
+            }
+
+            for (HomePolicy home : homePolicies) {
+              if (home.getUser().equals(Usernames.get(i))) {
+                double discounthome;
+                int HomeDiscount;
+                if (numPolicies.get(i) < 3) {
+                  discounthome = home.getBasePremium() * 0.9;
+                  Discount = (int) discounthome;
+                } else {
+                  discounthome = home.getBasePremium() * 0.8;
+                  HomeDiscount = (int) discounthome;
+                  Discount = Discount + (int) discounthome;
+                }
+              }
+            }
+
+            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                "",
+                Integer.toString(rank),
+                Usernames.get(i),
+                Integer.toString(Ages.get(i)),
+                Integer.toString(numPolicies.get(i)),
+                "ies",
+                Integer.toString(Discount));
+
+            for (LifePolicy life : lifePolicies) {
+              if (life.getUser().equals(Usernames.get(i))) {
+                double discountlife;
+                int LifeDiscount;
+                if (numPolicies.get(i) < 3) {
+                  discountlife = life.getBasePremium() * 0.9;
+                  Discount = (int) discountlife;
+                } else {
+                  discountlife = life.getBasePremium() * 0.8;
+                  LifeDiscount = (int) discountlife;
+                  Discount = Discount + (int) discountlife;
+                }
+
+                MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                    Integer.toString(life.getSumInsured()),
+                    Integer.toString(life.getBasePremium()),
+                    Integer.toString(LifeDiscount));
+              }
+            }
+
+            for (CarPolicy car : carPolicies) {
+              if (car.getUser().equals(Usernames.get(i))) {
+                double discountcar;
+                int CarDiscount;
+                if (numPolicies.get(i) < 3) {
+                  discountcar = car.getBasePremium() * 0.9;
+                  Discount = (int) discountcar;
+                } else {
+                  discountcar = car.getBasePremium() * 0.8;
+                  CarDiscount = (int) discountcar;
+                  Discount = Discount + (int) discountcar;
+                }
+                MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                    car.getMakeModel(),
+                    Integer.toString(car.getSumInsured()),
+                    Integer.toString(car.getBasePremium()),
+                    Integer.toString(CarDiscount));
+              }
+            }
+
+            for (HomePolicy home : homePolicies) {
+              if (home.getUser().equals(Usernames.get(i))) {
+                double discounthome;
+                int HomeDiscount;
+                if (numPolicies.get(i) < 3) {
+                  discounthome = home.getBasePremium() * 0.9;
+                  Discount = (int) discounthome;
+                } else {
+                  discounthome = home.getBasePremium() * 0.8;
+                  HomeDiscount = (int) discounthome;
+                  Discount = Discount + (int) discounthome;
+                }
+                MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                    home.getAddress(),
+                    Integer.toString(home.getSumInsured()),
+                    Integer.toString(home.getBasePremium()),
+                    Integer.toString(HomeDiscount));
+              }
+            }
+
+          } else {
+            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+                "",
+                Integer.toString(rank),
+                Usernames.get(i),
+                Integer.toString(Ages.get(i)),
+                Integer.toString(numPolicies.get(i)),
+                "ies",
+                "0");
+          }
         }
-        // MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
-        //     Integer.toString(rank), Usernames.get(i), Integer.toString(Ages.get(i)));
       }
-      rank = rank + 1;
     }
   }
 
