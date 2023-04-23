@@ -12,9 +12,10 @@ public class Profiles {
   private ArrayList<String> loadedUsers = new ArrayList<String>();
   private ArrayList<Integer> loadedUsersAge = new ArrayList<Integer>();
 
-  private ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
-  private ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
-  private ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
+  // private ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
+  // private ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
+  // private ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
+  private ArrayList<Policies> policies = new ArrayList<Policies>();
 
   private ArrayList<String> lifeUsers = new ArrayList<String>();
   private ArrayList<String> policyUsers = new ArrayList<String>();
@@ -64,53 +65,9 @@ public class Profiles {
     // Printing
     for (int i = 0; i < num; i++)
       if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
-        if (numPolicies.get(i) == 1) {
-          int Discount = 0;
-          for (LifePolicy life : lifePolicies) {
-            if (life.getUser().equals(Usernames.get(i))) {
-              Discount = Discount + life.getBasePremium();
-            }
-          }
 
-          for (CarPolicy car : carPolicies) {
-            if (car.getUser().equals(Usernames.get(i))) {
-              Discount = Discount + car.getBasePremium();
-            }
-          }
-
-          for (HomePolicy home : homePolicies) {
-            if (home.getUser().equals(Usernames.get(i))) {
-              Discount = Discount + home.getBasePremium();
-            }
-          }
-
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-              "*** ",
-              Integer.toString(rank),
-              Usernames.get(i),
-              Integer.toString(Ages.get(i)),
-              Integer.toString(numPolicies.get(i)),
-              "y",
-              Integer.toString(Discount));
-
-          for (int k = 0; i < lifePolicies.size(); i++) {
-            if (lifePolicies.get(k).getUser().equals(Usernames.get(i))) {
-              MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
-                  Integer.toString(lifePolicies.get(k).getSumInsured()),
-                  Integer.toString(lifePolicies.get(k).getBasePremium()),
-                  Integer.toString(lifePolicies.get(k).getBasePremium()));
-            }
-          }
-
-        } else {
-
-        }
       } else {
-        if (numPolicies.get(i) == 1) {
 
-        } else {
-
-        }
         rank = rank + 1;
       }
   }
@@ -219,17 +176,20 @@ public class Profiles {
     if (age != 0) {
       if (type == PolicyType.CAR) {
         CarPolicy car = new CarPolicy(options, user, age);
-        carPolicies.add(car);
+        // carPolicies.add(car);
+        policies.add(car);
         policyUsers.add(user);
         policyOrder.add("car");
       } else if (type == PolicyType.HOME) {
         HomePolicy home = new HomePolicy(options, user, age);
-        homePolicies.add(home);
+        // homePolicies.add(home);
+        policies.add(home);
         policyUsers.add(user);
         policyOrder.add("home");
       } else if (type == PolicyType.LIFE && age < 100 && lifeUsers.contains(user) == false) {
         LifePolicy life = new LifePolicy(options, user, age);
-        lifePolicies.add(life);
+        // lifePolicies.add(life);
+        policies.add(life);
         lifeUsers.add(user);
         policyUsers.add(user);
         policyOrder.add("life");
