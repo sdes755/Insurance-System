@@ -374,15 +374,41 @@ public class Profiles {
                 Integer.toString(numPolicies.get(i)),
                 "ies",
                 Integer.toString(Discount));
-
-            for (int j = 0; j < lifePolicies.size(); j++) {
-              if (lifePolicies.get(j).getUser().equals(Usernames.get(i))) {
-                MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
-                    Integer.toString(lifePolicies.get(j).getSumInsured()),
-                    Integer.toString(lifePolicies.get(j).getBasePremium()),
-                    Integer.toString(lifePolicies.get(j).getBasePremium()));
-                lifePolicies.remove(j).getUser();
-                break;
+            for (int k = 0; k < policyUsers.size(); k++) {
+              if (policyOrder.get(k).equals("life")) {
+                for (int j = 0; j < lifePolicies.size(); j++) {
+                  if (lifePolicies.get(j).getUser().equals(Usernames.get(i))) {
+                    MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
+                        Integer.toString(lifePolicies.get(j).getSumInsured()),
+                        Integer.toString(lifePolicies.get(j).getBasePremium()),
+                        Integer.toString(lifePolicies.get(j).getBasePremium()));
+                    break;
+                  }
+                }
+              } else if (policyOrder.get(k).equals("home")) {
+                for (int j = 0; j < homePolicies.size(); j++) {
+                  if (homePolicies.get(j).getUser().equals(Usernames.get(i))) {
+                    MessageCli.PRINT_DB_HOME_POLICY.printMessage(
+                        (homePolicies.get(j).getAddress()),
+                        Integer.toString(homePolicies.get(j).getSumInsured()),
+                        Integer.toString(homePolicies.get(j).getBasePremium()),
+                        Integer.toString(homePolicies.get(j).getBasePremium()));
+                    homePolicies.remove(j).getUser();
+                    break;
+                  }
+                }
+              } else if (policyOrder.get(k).equals("car")) {
+                for (int j = 0; j < carPolicies.size(); j++) {
+                  if (carPolicies.get(j).getUser().equals(Usernames.get(i))) {
+                    MessageCli.PRINT_DB_CAR_POLICY.printMessage(
+                        (carPolicies.get(j).getMakeModel()),
+                        Integer.toString(carPolicies.get(j).getSumInsured()),
+                        Integer.toString(carPolicies.get(j).getBasePremium()),
+                        Integer.toString(carPolicies.get(j).getBasePremium()));
+                    carPolicies.remove(j).getUser();
+                    break;
+                  }
+                }
               }
             }
           } else {
