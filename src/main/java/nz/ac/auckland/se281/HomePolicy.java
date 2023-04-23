@@ -5,15 +5,15 @@ public class HomePolicy extends Policies {
   private String address;
   private boolean rental;
 
-  public HomePolicy(String[] options, String userName, double age) {
-    super(options, userName, age);
+  public HomePolicy(String[] options, String user, int age) {
+    super(options, user, age);
     this.address = options[1];
     if (options[2].compareTo("yes") == 0) {
       this.rental = true;
     } else {
       this.rental = false;
     }
-    setBasePremium();
+    BasePremium();
   }
 
   public String getUser() {
@@ -33,7 +33,7 @@ public class HomePolicy extends Policies {
   }
 
   @Override
-  public int setBasePremium() {
+  public int BasePremium() {
 
     if (rental) {
       basePremium = (int) (sumInsured * 0.02);

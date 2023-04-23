@@ -4,10 +4,10 @@ public class LifePolicy extends Policies {
 
   public LifePolicy(String[] options, String userName, double age) {
     super(options, userName, age);
-    setBasePremium();
+    BasePremium();
   }
 
-  public String getUser(){
+  public String getUser() {
     return userName;
   }
 
@@ -20,7 +20,7 @@ public class LifePolicy extends Policies {
   }
 
   @Override
-  public int setBasePremium() {
+  public int BasePremium() {
     basePremium = (int) (sumInsured * 0.01 * (1 + (age / 100)));
     MessageCli.NEW_POLICY_CREATED.printMessage("life", userName);
     return basePremium;

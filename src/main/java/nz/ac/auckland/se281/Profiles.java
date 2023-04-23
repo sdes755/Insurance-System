@@ -19,7 +19,7 @@ public class Profiles {
 
   private ArrayList<String> lifeUsers = new ArrayList<String>();
   private ArrayList<String> policyUsers = new ArrayList<String>();
-  private ArrayList<String> policyOrder = new ArrayList<String>();
+  // private ArrayList<String> policyOrder = new ArrayList<String>();
 
   // Creating a method to store the Usernames and Ages in the array lists
   public void addUserAges(String userName, int age) {
@@ -64,8 +64,20 @@ public class Profiles {
     }
     // Printing
     for (int i = 0; i < num; i++)
-      if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
+      if (loadnum == 1 && (loadedUsers.get(0)).equals(Usernames.get(i))) {
+        
+        for(Policies userPolicy : policies){
+          if(userPolicy.getUserName().equals(Usernames.get(i))){
 
+            if(userPolicy instanceof LifePolicy){
+
+            } else if(userPolicy instanceof CarPolicy){
+            } else if(userPolicy instanceof HomePolicy){
+            }
+            
+            
+          }
+        }
       } else {
 
         rank = rank + 1;
@@ -176,23 +188,20 @@ public class Profiles {
     if (age != 0) {
       if (type == PolicyType.CAR) {
         CarPolicy car = new CarPolicy(options, user, age);
-        // carPolicies.add(car);
         policies.add(car);
         policyUsers.add(user);
-        policyOrder.add("car");
+        // policyOrder.add("car");
       } else if (type == PolicyType.HOME) {
         HomePolicy home = new HomePolicy(options, user, age);
-        // homePolicies.add(home);
         policies.add(home);
         policyUsers.add(user);
-        policyOrder.add("home");
+        // policyOrder.add("home");
       } else if (type == PolicyType.LIFE && age < 100 && lifeUsers.contains(user) == false) {
         LifePolicy life = new LifePolicy(options, user, age);
-        // lifePolicies.add(life);
         policies.add(life);
         lifeUsers.add(user);
         policyUsers.add(user);
-        policyOrder.add("life");
+        // policyOrder.add("life");
       } else if (type == PolicyType.LIFE && age > 100) {
         MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
       } else if (type == PolicyType.LIFE && lifeUsers.contains(user) == true) {

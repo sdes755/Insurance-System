@@ -13,7 +13,7 @@ public class CarPolicy extends Policies {
     } else {
       this.mechB = false;
     }
-    setBasePremium();
+    BasePremium();
   }
 
   public String getUser() {
@@ -33,7 +33,7 @@ public class CarPolicy extends Policies {
   }
 
   @Override
-  public int setBasePremium() {
+  public int BasePremium() {
     double baseP;
     if (age > 24) {
       baseP = 0.1 * sumInsured;
