@@ -4,7 +4,9 @@ public class HomePolicy extends Policies {
   // Creating protected variables that is unique to the home policy
   private String address;
   private boolean rental;
-  // Creating the constructor that takes in the options array, the user name and the age
+
+  // Creating the constructor that takes in the options array, the user name and
+  // the age
   public HomePolicy(String[] options, String user, int age) {
     // Calling the super constructor from the Policies class
     super(options, user, age);
@@ -19,6 +21,7 @@ public class HomePolicy extends Policies {
     // Calling the abstract method from the Policies class
     BasePremium();
   }
+
   // Creating getters for user, Address, sum insured and base premium
   public String getUser() {
     return userName;
@@ -35,11 +38,14 @@ public class HomePolicy extends Policies {
   public int getBasePremium() {
     return basePremium;
   }
-  // Overriding the abstract method from the parent class to calculate the base premium for the home
+
+  // Overriding the abstract method from the parent class to calculate the base
+  // premium for the home
   // policy
   @Override
   public int BasePremium() {
-    // Checking if it is a rental property or not and calculating the base premium accordingly
+    // Checking if it is a rental property or not and calculating the base premium
+    // accordingly
     if (rental) {
       basePremium = (int) (sumInsured * 0.02);
     } else {

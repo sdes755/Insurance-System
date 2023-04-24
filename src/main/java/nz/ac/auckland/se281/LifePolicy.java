@@ -7,7 +7,9 @@ public class LifePolicy extends Policies {
     // Calling the abstract method from the Policies class
     BasePremium();
   }
-  // Creating getters for the user, sum insured and base premium, which is required for printing out
+
+  // Creating getters for the user, sum insured and base premium, which is
+  // required for printing out
   // the policy details
   public String getUser() {
     return userName;
@@ -20,7 +22,9 @@ public class LifePolicy extends Policies {
   public int getBasePremium() {
     return basePremium;
   }
-  // Overriding the abstract method from the Policies class to calculate the base premium for the
+
+  // Overriding the abstract method from the Policies class to calculate the base
+  // premium for the
   // life
   @Override
   public int BasePremium() {
