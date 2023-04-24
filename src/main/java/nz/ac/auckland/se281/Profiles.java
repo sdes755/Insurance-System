@@ -8,10 +8,10 @@ public class Profiles {
   // Crecating two array lists for Usernames and the Ages to be stored in
   private ArrayList<String> Usernames = new ArrayList<String>();
   private ArrayList<Integer> Ages = new ArrayList<Integer>();
-
+  // Creating array lists to store info of the user that is loaded in the database
   private ArrayList<String> loadedUsers = new ArrayList<String>();
   private ArrayList<Integer> loadedUsersAge = new ArrayList<Integer>();
-
+  // Creating array lists for storing policy users,policy details and policies
   private ArrayList<LifePolicy> lifePolicies = new ArrayList<LifePolicy>();
   private ArrayList<CarPolicy> carPolicies = new ArrayList<CarPolicy>();
   private ArrayList<HomePolicy> homePolicies = new ArrayList<HomePolicy>();
@@ -502,50 +502,68 @@ public class Profiles {
     // Truth value is returned, and if 1, the age is passed.
     return truthv;
   }
-
+  // Created a method to load the profile of the user in the system
   public void profileLoad(String userName) {
     int truth = 0;
     int profileIndex = 0;
-
+    // For loop to check if the user exists in the database
     for (int i = 0; i < Usernames.size(); i++) {
-
+      // If the user exists, the truth value is changed to 1 and the index of the user is stored
       if (userName.equals(Usernames.get(i)) == true) {
         truth = 1;
         profileIndex = i;
       }
     }
+    // If the user exists, the user is loaded into the system
     if (truth == 1 && loadedUsers.size() == 0) {
+      // User is added on to the array list containing the loaded users along with their age in the
+      // loaded ages array list
       loadedUsers.add(userName);
       loadedUsersAge.add(Ages.get(profileIndex));
+      // Printing message to show that profile is loaded
       MessageCli.PROFILE_LOADED.printMessage(userName);
+      // If the user does exist, but there is already a profile loaded
     } else if (truth == 1 && loadedUsers.size() == 1) {
-
+      // First we unload the loaded profile
       profileUnload();
+      // Then we load the new profile and add user and age to the array lists
       loadedUsers.add(userName);
       loadedUsersAge.add(Ages.get(profileIndex));
+      // Printing message to show that profile is loaded
       MessageCli.PROFILE_LOADED.printMessage(userName);
+      // If the user name does not exist in the database
     } else {
+      // Print message saying no profile is in the database to load
       MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
     }
   }
-
+  // Unloading profiles
   public void profileUnload() {
+    // Checking if there is a profile loaded
     if (loadedUsers.size() == 0) {
+      // If there isn't print the message saying no profile is loaded
       MessageCli.NO_PROFILE_LOADED.printMessage();
     } else {
+      // If there is a profile loaded, unload the profile and remove the user and age from the array
       String userUnload = loadedUsers.get(0);
       loadedUsers.remove(0);
       loadedUsersAge.remove(0);
+      // Print message to show that the profile is unloaded
       MessageCli.PROFILE_UNLOADED.printMessage(userUnload);
     }
   }
-
+  // Delete profiles
   public void profileDelete(String userName) {
+
     int loadnum = loadedUsers.size();
+    // Checking to see if the user that we are wanting to delete is in the loaded users array, as we
+    // can delete a loaded profile
     if (loadnum == 1 && (userName.equals(loadedUsers.get(0)))) {
+      // Print message saying that we can't delete a loaded profile
       MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
       return;
     }
+    // Checking to see if the user is in the database, and finding its index in the user array list
     int profileCheck = 0;
     int profileIndex = 0;
     for (int i = 0; i < Usernames.size(); i++) {
@@ -554,8 +572,9 @@ public class Profiles {
         profileIndex = i;
       }
     }
-
+    // If the user is in the database, delete the profile
     if (profileCheck == 1) {
+      // Delete the user and their age from the array lists
       Usernames.remove(profileIndex);
       Ages.remove(profileIndex);
       // delete all policies associated with the profile
@@ -607,33 +626,43 @@ public class Profiles {
           i--;
         }
       }
-
+      // Print message saying profile is deleted
       MessageCli.PROFILE_DELETED.printMessage(userName);
     } else {
+      // If the user is not in the database, print message saying no profile is in the database to
+      // delete
       MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
     }
   }
-
+  // Finding the username of the loaded user
   public String loadedUser() {
+    // finding the username of the loaded user using an if condition and returning the username
     if (loadedUsersAge.size() == 1) {
       return loadedUsers.get(0);
     } else {
       return "";
     }
   }
-
+  // Finding the age of the loaded user
   public int loadAge() {
+    // Finding the age of the loaded user using an if condition and returning the age
     if (loadedUsersAge.size() == 1) {
       return loadedUsersAge.get(0);
     } else {
       return 0;
     }
   }
-
+  // Creating and storing policies for the users
   public void storePolicy(PolicyType type, String[] options) {
+    // Initialising the username and age of the loaded user
     String user = loadedUser();
     int age = loadAge();
+    // If the user age is not zero, create a new policy and add it to the array list
     if (age != 0) {
+      // Checking the type of policy wanting to be created and storing the policy details obtained
+      // from the Abstract and sub classes
+      // Storing it in array lists made for all policies, for each policy type, and storing the
+      // users in the respective policyuser array
       if (type == PolicyType.CAR) {
         CarPolicy car = new CarPolicy(options, user, age);
         carPolicies.add(car);
@@ -649,18 +678,20 @@ public class Profiles {
         lifePolicies.add(life);
         allPolicies.add(life);
         lifeUsers.add(user);
+        // Checking to see if a user is wanting to create a life array and to check their age is
+        // below 100
       } else if (type == PolicyType.LIFE && age > 100) {
+        // If they age is above a 100, print message saying age is over limit
         MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(user);
       } else if (type == PolicyType.LIFE && lifeUsers.contains(user) == true) {
+        // If the user already has a life policy, print message saying they already have a life
+        // policy
         MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(user);
       }
     } else {
+      // If the user is not loaded, print message saying no profile is loaded and the policy cannot
+      // be created
       MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
     }
-
-    // for (LifePolicy tempLifePolicy : lifePolicies) {
-    //   System.out.println(tempLifePolicy.getBasePremium());
-    // }
-    // }
   }
 }
