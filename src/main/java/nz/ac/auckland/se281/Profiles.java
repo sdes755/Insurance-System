@@ -5,9 +5,9 @@ import java.util.Collections;
 import nz.ac.auckland.se281.Main.PolicyType;
 
 public class Profiles {
-  // Crecating two array lists for Usernames and the Ages to be stored in
-  private ArrayList<String> Usernames = new ArrayList<String>();
-  private ArrayList<Integer> Ages = new ArrayList<Integer>();
+  // Crecating two array lists for userNames and the userAges to be stored in
+  private ArrayList<String> userNames = new ArrayList<String>();
+  private ArrayList<Integer> userAges = new ArrayList<Integer>();
   // Creating array lists to store info of the user that is loaded in the database
   private ArrayList<String> loadedUsers = new ArrayList<String>();
   private ArrayList<Integer> loadedUsersAge = new ArrayList<Integer>();
@@ -20,7 +20,7 @@ public class Profiles {
   private ArrayList<String> homeUsers = new ArrayList<String>();
   private ArrayList<String> lifeUsers = new ArrayList<String>();
 
-  // Creating a method to store the Usernames and Ages in the array lists
+  // Creating a method to store the userNames and userAges in the array lists
   public void addUserAges(String userName, int age) {
     // Using a for loop to check if the inputted username is unique
     int truth = 1;
@@ -28,17 +28,17 @@ public class Profiles {
       MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedUsers.get(0));
       return;
     }
-    for (int i = 0; i < Usernames.size(); i++) {
+    for (int i = 0; i < userNames.size(); i++) {
       // If it is not unique, we change the truth value to 0, and it will not be added
-      if (userName.equals(Usernames.get(i)) == true) {
+      if (userName.equals(userNames.get(i)) == true) {
         truth = 0;
       }
     }
-    // Checking the truth value, if 1, we add the usernames and ages. if 0, we print the error
+    // Checking the truth value, if 1, we add the userNames and ages. if 0, we print the error
     // message.
     if (truth == 1) {
-      Usernames.add(userName);
-      Ages.add(age);
+      userNames.add(userName);
+      userAges.add(age);
       MessageCli.PROFILE_CREATED.printMessage(userName, Integer.toString(age));
     } else {
       MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
@@ -50,7 +50,7 @@ public class Profiles {
     // Creating an array list to store the number of policies for each user
     ArrayList<Integer> numPolicies = new ArrayList<Integer>();
     // Initialising variables for easy access
-    int num = Usernames.size();
+    int num = userNames.size();
     int loadnum = loadedUsers.size();
     // Creating a variable to store the rank of the user for printing
     int rank = 1;
@@ -61,14 +61,14 @@ public class Profiles {
       int counter = 0;
       // 3 if statements to check if the user has a policy of each type and if they do, add the
       // number of policies to the counter
-      if (carUsers.contains(Usernames.get(i)) && carUsers.size() != 0) {
-        counter = counter + Collections.frequency(carUsers, Usernames.get(i));
+      if (carUsers.contains(userNames.get(i)) && carUsers.size() != 0) {
+        counter = counter + Collections.frequency(carUsers, userNames.get(i));
       }
-      if (lifeUsers.contains(Usernames.get(i)) && lifeUsers.size() != 0) {
-        counter = counter + Collections.frequency(lifeUsers, Usernames.get(i));
+      if (lifeUsers.contains(userNames.get(i)) && lifeUsers.size() != 0) {
+        counter = counter + Collections.frequency(lifeUsers, userNames.get(i));
       }
-      if (homeUsers.contains(Usernames.get(i)) && homeUsers.size() != 0) {
-        counter = counter + Collections.frequency(homeUsers, Usernames.get(i));
+      if (homeUsers.contains(userNames.get(i)) && homeUsers.size() != 0) {
+        counter = counter + Collections.frequency(homeUsers, userNames.get(i));
       }
       if (counter == 0) {
         counter = counter;
@@ -81,28 +81,28 @@ public class Profiles {
     for (int i = 0; i < num; i++) {
       // If there is a user loaded, we check if the user is the same as the user in the database, if
       // it is, we print the user details and policies
-      if (((loadnum == 1) && (loadedUsers.get(0)).equals(Usernames.get(i)))) {
+      if (((loadnum == 1) && (loadedUsers.get(0)).equals(userNames.get(i)))) {
         if (numPolicies.get(i) == 1) {
           // If the user only has one policy
           if (numPolicies.get(i) == 1) {
 
-            int Discount = 0;
+            int totalPay = 0;
             // Running a for-each loop to calculate the base premium for each user and add it to the
-            // discount variable which stores the total amount needed to be paid, and will be
+            // totalPay variable which stores the total amount needed to be paid, and will be
             // printed in the details
             for (Policies userPolicy : allPolicies) {
-              if (userPolicy.getUserName().equals(Usernames.get(i))) {
+              if (userPolicy.getUserName().equals(userNames.get(i))) {
                 // Creating if conditions for each instance of the policy to check if the user has a
-                // policy of that type, if they do, we add the base premium to the discount variable
+                // policy of that type, if they do, we add the base premium to the totalPay variable
                 if (userPolicy instanceof LifePolicy) {
                   LifePolicy lifePolicy = (LifePolicy) userPolicy;
-                  Discount += lifePolicy.getBasePremium();
+                  totalPay += lifePolicy.getBasePremium();
                 } else if (userPolicy instanceof CarPolicy) {
                   CarPolicy carPolicy = (CarPolicy) userPolicy;
-                  Discount += carPolicy.getBasePremium();
+                  totalPay += carPolicy.getBasePremium();
                 } else if (userPolicy instanceof HomePolicy) {
                   HomePolicy homePolicy = (HomePolicy) userPolicy;
-                  Discount += homePolicy.getBasePremium();
+                  totalPay += homePolicy.getBasePremium();
                 }
               }
             }
@@ -110,15 +110,15 @@ public class Profiles {
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
                 "*** ",
                 Integer.toString(rank),
-                Usernames.get(i),
-                Integer.toString(Ages.get(i)),
+                userNames.get(i),
+                Integer.toString(userAges.get(i)),
                 Integer.toString(numPolicies.get(i)),
                 "y",
-                Integer.toString(Discount));
+                Integer.toString(totalPay));
             // Using a for-each loop to print the details of each policy for the user
             for (Policies printPolicy : allPolicies) {
               // Checking if the user has a Policy, if they do, we print the details
-              if (printPolicy.getUserName().equals(Usernames.get(i))) {
+              if (printPolicy.getUserName().equals(userNames.get(i))) {
                 // Creating an instance of lifePolicy so that we can print the details of the life
                 // policy out for the user
                 if (printPolicy instanceof LifePolicy) {
@@ -153,49 +153,49 @@ public class Profiles {
         } else {
           // If the user has more than one policy
           if (numPolicies.get(i) != 0) {
-            int Discount = 0;
+            int totalPay = 0;
             // Creating a for-each loop to calculate the life base premium for each user and add it
-            // to the discount. If the user has more than 3 policies, we apply a 20% discount, if
-            // they have less than 3 policies, we apply a 10% discount
+            // to the totalPay. If the user has more than 3 policies, we apply a 20% totalPay, if
+            // they have less than 3 policies, we apply a 10% totalPay
             for (LifePolicy life : lifePolicies) {
-              if (life.getUser().equals(Usernames.get(i))) {
-                double discountlife;
+              if (life.getUser().equals(userNames.get(i))) {
+                double totalPaylife;
                 if (numPolicies.get(i) < 3) {
-                  discountlife = life.getBasePremium() * 0.9;
-                  Discount = Discount + (int) discountlife;
+                  totalPaylife = life.getBasePremium() * 0.9;
+                  totalPay = totalPay + (int) totalPaylife;
                 } else {
-                  discountlife = life.getBasePremium() * 0.8;
-                  Discount = Discount + (int) discountlife;
+                  totalPaylife = life.getBasePremium() * 0.8;
+                  totalPay = totalPay + (int) totalPaylife;
                 }
               }
             }
             // Creating a for-each loop to calculate the car base premium for each user and add it
-            // to the discount. If the user has more than 3 policies, we apply a 20% discount, if
-            // they have less than 3 policies, we apply a 10% discount
+            // to the totalPay. If the user has more than 3 policies, we apply a 20% totalPay, if
+            // they have less than 3 policies, we apply a 10% totalPay
             for (CarPolicy car : carPolicies) {
-              if (car.getUser().equals(Usernames.get(i))) {
-                double discountcar;
+              if (car.getUser().equals(userNames.get(i))) {
+                double totalPaycar;
                 if (numPolicies.get(i) < 3) {
-                  discountcar = car.getBasePremium() * 0.9;
-                  Discount = Discount + (int) discountcar;
+                  totalPaycar = car.getBasePremium() * 0.9;
+                  totalPay = totalPay + (int) totalPaycar;
                 } else {
-                  discountcar = car.getBasePremium() * 0.8;
-                  Discount = Discount + (int) discountcar;
+                  totalPaycar = car.getBasePremium() * 0.8;
+                  totalPay = totalPay + (int) totalPaycar;
                 }
               }
             }
             // Creating a for-each loop to calculate the home base premium for each user and add it
-            // to the discount. If the user has more than 3 policies, we apply a 20% discount, if
-            // they have less than 3 policies, we apply a 10% discount
+            // to the totalPay. If the user has more than 3 policies, we apply a 20% totalPay, if
+            // they have less than 3 policies, we apply a 10% totalPay
             for (HomePolicy home : homePolicies) {
-              if (home.getUser().equals(Usernames.get(i))) {
-                double discounthome;
+              if (home.getUser().equals(userNames.get(i))) {
+                double totalPayhome;
                 if (numPolicies.get(i) < 3) {
-                  discounthome = home.getBasePremium() * 0.9;
-                  Discount = Discount + (int) discounthome;
+                  totalPayhome = home.getBasePremium() * 0.9;
+                  totalPay = totalPay + (int) totalPayhome;
                 } else {
-                  discounthome = home.getBasePremium() * 0.8;
-                  Discount = Discount + (int) discounthome;
+                  totalPayhome = home.getBasePremium() * 0.8;
+                  totalPay = totalPay + (int) totalPayhome;
                 }
               }
             }
@@ -204,74 +204,74 @@ public class Profiles {
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
                 "*** ",
                 Integer.toString(rank),
-                Usernames.get(i),
-                Integer.toString(Ages.get(i)),
+                userNames.get(i),
+                Integer.toString(userAges.get(i)),
                 Integer.toString(numPolicies.get(i)),
                 "ies",
-                Integer.toString(Discount));
+                Integer.toString(totalPay));
             // Creating a for-each loop to print the details of each policy for the user
             for (Policies printPolicy : allPolicies) {
               // Checking if the user has a Policy, if they do, we print the details
-              if (printPolicy.getUserName().equals(Usernames.get(i))) {
+              if (printPolicy.getUserName().equals(userNames.get(i))) {
                 // Creating an instance of lifePolicy so that we can print the details of the life
                 // policy out for the user
                 if (printPolicy instanceof LifePolicy) {
                   LifePolicy lifePolicy = (LifePolicy) printPolicy;
-                  // If the user has 3 or more policies, we apply a 20% discount, if they have less
-                  // than 3 policies, we apply a 10% discount
+                  // If the user has 3 or more policies, we apply a 20% totalPay, if they have less
+                  // than 3 policies, we apply a 10% totalPay
                   if (numPolicies.get(i) < 3) {
-                    int discountlife = (int) (lifePolicy.getBasePremium() * 0.9);
+                    int totalPaylife = (int) (lifePolicy.getBasePremium() * 0.9);
                     MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
                         Integer.toString(lifePolicy.getSumInsured()),
                         Integer.toString(lifePolicy.getBasePremium()),
-                        Integer.toString(discountlife));
+                        Integer.toString(totalPaylife));
                   } else {
-                    int discountlife = (int) (lifePolicy.getBasePremium() * 0.8);
+                    int totalPaylife = (int) (lifePolicy.getBasePremium() * 0.8);
                     MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
                         Integer.toString(lifePolicy.getSumInsured()),
                         Integer.toString(lifePolicy.getBasePremium()),
-                        Integer.toString(discountlife));
+                        Integer.toString(totalPaylife));
                   }
                   // Creating an instance of carPolicy so that we can print the details of the car
                 } else if (printPolicy instanceof CarPolicy) {
                   CarPolicy carPolicy = (CarPolicy) printPolicy;
-                  // If the user has 3 or more policies, we apply a 20% discount, if they have less
-                  // than 3 policies, we apply a 10% discount
+                  // If the user has 3 or more policies, we apply a 20% totalPay, if they have less
+                  // than 3 policies, we apply a 10% totalPay
                   if (numPolicies.get(i) < 3) {
-                    int discountcar = (int) (carPolicy.getBasePremium() * 0.9);
+                    int totalPaycar = (int) (carPolicy.getBasePremium() * 0.9);
                     MessageCli.PRINT_DB_CAR_POLICY.printMessage(
                         carPolicy.getMakeModel(),
                         Integer.toString(carPolicy.getSumInsured()),
                         Integer.toString(carPolicy.getBasePremium()),
-                        Integer.toString(discountcar));
+                        Integer.toString(totalPaycar));
                   } else {
-                    int discountcar = (int) (carPolicy.getBasePremium() * 0.8);
+                    int totalPaycar = (int) (carPolicy.getBasePremium() * 0.8);
                     MessageCli.PRINT_DB_CAR_POLICY.printMessage(
                         carPolicy.getMakeModel(),
                         Integer.toString(carPolicy.getSumInsured()),
                         Integer.toString(carPolicy.getBasePremium()),
-                        Integer.toString(discountcar));
+                        Integer.toString(totalPaycar));
                   }
                   // Creating an instance of homePolicy so that we can print the details of the home
                   // policy out for the user
                 } else if (printPolicy instanceof HomePolicy) {
                   HomePolicy homePolicy = (HomePolicy) printPolicy;
-                  // If the user has 3 or more policies, we apply a 20% discount, if they have less
-                  // than 3 policies, we apply a 10% discount
+                  // If the user has 3 or more policies, we apply a 20% totalPay, if they have less
+                  // than 3 policies, we apply a 10% totalPay
                   if (numPolicies.get(i) < 3) {
-                    int discounthome = (int) (homePolicy.getBasePremium() * 0.9);
+                    int totalPayhome = (int) (homePolicy.getBasePremium() * 0.9);
                     MessageCli.PRINT_DB_HOME_POLICY.printMessage(
                         homePolicy.getAddress(),
                         Integer.toString(homePolicy.getSumInsured()),
                         Integer.toString(homePolicy.getBasePremium()),
-                        Integer.toString(discounthome));
+                        Integer.toString(totalPayhome));
                   } else {
-                    int discounthome = (int) (homePolicy.getBasePremium() * 0.8);
+                    int totalPayhome = (int) (homePolicy.getBasePremium() * 0.8);
                     MessageCli.PRINT_DB_HOME_POLICY.printMessage(
                         homePolicy.getAddress(),
                         Integer.toString(homePolicy.getSumInsured()),
                         Integer.toString(homePolicy.getBasePremium()),
-                        Integer.toString(discounthome));
+                        Integer.toString(totalPayhome));
                   }
                 }
               }
@@ -283,8 +283,8 @@ public class Profiles {
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
                 "*** ",
                 Integer.toString(rank),
-                Usernames.get(i),
-                Integer.toString(Ages.get(i)),
+                userNames.get(i),
+                Integer.toString(userAges.get(i)),
                 Integer.toString(numPolicies.get(i)),
                 "ies",
                 "0");
@@ -294,38 +294,38 @@ public class Profiles {
       } else {
         // If the user only has one policy
         if (numPolicies.get(i) == 1) {
-          int Discount = 0;
+          int totalPay = 0;
           // Using for-each loops to get the total premium for the user from each policy
           for (LifePolicy life : lifePolicies) {
-            if (life.getUser().equals(Usernames.get(i))) {
-              Discount = Discount + life.getBasePremium();
+            if (life.getUser().equals(userNames.get(i))) {
+              totalPay = totalPay + life.getBasePremium();
             }
           }
 
           for (CarPolicy car : carPolicies) {
-            if (car.getUser().equals(Usernames.get(i))) {
-              Discount = Discount + car.getBasePremium();
+            if (car.getUser().equals(userNames.get(i))) {
+              totalPay = totalPay + car.getBasePremium();
             }
           }
 
           for (HomePolicy home : homePolicies) {
-            if (home.getUser().equals(Usernames.get(i))) {
-              Discount = Discount + home.getBasePremium();
+            if (home.getUser().equals(userNames.get(i))) {
+              totalPay = totalPay + home.getBasePremium();
             }
           }
           // Printing the user details along with the total premium needed to be paid
           MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
               "",
               Integer.toString(rank),
-              Usernames.get(i),
-              Integer.toString(Ages.get(i)),
+              userNames.get(i),
+              Integer.toString(userAges.get(i)),
               Integer.toString(numPolicies.get(i)),
               "y",
-              Integer.toString(Discount));
+              Integer.toString(totalPay));
           // Using for-each loop to print the policy details out for the user
           for (Policies printPolicy : allPolicies) {
             // If the user matches in the policy array, we print out the policy details for the user
-            if (printPolicy.getUserName().equals(Usernames.get(i))) {
+            if (printPolicy.getUserName().equals(userNames.get(i))) {
               // Creating an instance of lifePolicy so that we can print the details of the life
               // policy out for the user
               if (printPolicy instanceof LifePolicy) {
@@ -359,43 +359,43 @@ public class Profiles {
         } else {
           // If the user has more than one policy
           if (numPolicies.get(i) != 0) {
-            int Discount = 0;
+            int totalPay = 0;
             // Using for-each loops to get the total premium for the user from each policy and
-            // applying discounts accordingly
+            // applying totalPays accordingly
             for (LifePolicy life : lifePolicies) {
-              if (life.getUser().equals(Usernames.get(i))) {
-                double discountlife;
+              if (life.getUser().equals(userNames.get(i))) {
+                double totalPaylife;
                 if (numPolicies.get(i) < 3) {
-                  discountlife = life.getBasePremium() * 0.9;
-                  Discount = Discount + (int) discountlife;
+                  totalPaylife = life.getBasePremium() * 0.9;
+                  totalPay = totalPay + (int) totalPaylife;
                 } else {
-                  discountlife = life.getBasePremium() * 0.8;
-                  Discount = Discount + (int) discountlife;
+                  totalPaylife = life.getBasePremium() * 0.8;
+                  totalPay = totalPay + (int) totalPaylife;
                 }
               }
             }
             for (CarPolicy car : carPolicies) {
-              if (car.getUser().equals(Usernames.get(i))) {
-                double discountcar;
+              if (car.getUser().equals(userNames.get(i))) {
+                double totalPaycar;
                 if (numPolicies.get(i) < 3) {
-                  discountcar = car.getBasePremium() * 0.9;
-                  Discount = Discount + (int) discountcar;
+                  totalPaycar = car.getBasePremium() * 0.9;
+                  totalPay = totalPay + (int) totalPaycar;
                 } else {
-                  discountcar = car.getBasePremium() * 0.8;
-                  Discount = Discount + (int) discountcar;
+                  totalPaycar = car.getBasePremium() * 0.8;
+                  totalPay = totalPay + (int) totalPaycar;
                 }
               }
             }
 
             for (HomePolicy home : homePolicies) {
-              if (home.getUser().equals(Usernames.get(i))) {
-                double discounthome;
+              if (home.getUser().equals(userNames.get(i))) {
+                double totalPayhome;
                 if (numPolicies.get(i) < 3) {
-                  discounthome = home.getBasePremium() * 0.9;
-                  Discount = Discount + (int) discounthome;
+                  totalPayhome = home.getBasePremium() * 0.9;
+                  totalPay = totalPay + (int) totalPayhome;
                 } else {
-                  discounthome = home.getBasePremium() * 0.8;
-                  Discount = Discount + (int) discounthome;
+                  totalPayhome = home.getBasePremium() * 0.8;
+                  totalPay = totalPay + (int) totalPayhome;
                 }
               }
             }
@@ -404,63 +404,63 @@ public class Profiles {
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
                 "",
                 Integer.toString(rank),
-                Usernames.get(i),
-                Integer.toString(Ages.get(i)),
+                userNames.get(i),
+                Integer.toString(userAges.get(i)),
                 Integer.toString(numPolicies.get(i)),
                 "ies",
-                Integer.toString(Discount));
+                Integer.toString(totalPay));
             // Using for-each loops to print out the policy details of each type for the user
-            // Checking the number of policies the user has and applying discounts accordingly
+            // Checking the number of policies the user has and applying totalPays accordingly
             for (Policies printPolicy : allPolicies) {
-              if (printPolicy.getUserName().equals(Usernames.get(i))) {
+              if (printPolicy.getUserName().equals(userNames.get(i))) {
                 if (printPolicy instanceof LifePolicy) {
                   LifePolicy lifePolicy = (LifePolicy) printPolicy;
                   if (numPolicies.get(i) < 3) {
-                    int discountlife = (int) (lifePolicy.getBasePremium() * 0.9);
+                    int totalPaylife = (int) (lifePolicy.getBasePremium() * 0.9);
                     MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
                         Integer.toString(lifePolicy.getSumInsured()),
                         Integer.toString(lifePolicy.getBasePremium()),
-                        Integer.toString(discountlife));
+                        Integer.toString(totalPaylife));
                   } else {
-                    int discountlife = (int) (lifePolicy.getBasePremium() * 0.8);
+                    int totalPaylife = (int) (lifePolicy.getBasePremium() * 0.8);
                     MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
                         Integer.toString(lifePolicy.getSumInsured()),
                         Integer.toString(lifePolicy.getBasePremium()),
-                        Integer.toString(discountlife));
+                        Integer.toString(totalPaylife));
                   }
                 } else if (printPolicy instanceof CarPolicy) {
                   CarPolicy carPolicy = (CarPolicy) printPolicy;
                   if (numPolicies.get(i) < 3) {
-                    int discountcar = (int) (carPolicy.getBasePremium() * 0.9);
+                    int totalPaycar = (int) (carPolicy.getBasePremium() * 0.9);
                     MessageCli.PRINT_DB_CAR_POLICY.printMessage(
                         carPolicy.getMakeModel(),
                         Integer.toString(carPolicy.getSumInsured()),
                         Integer.toString(carPolicy.getBasePremium()),
-                        Integer.toString(discountcar));
+                        Integer.toString(totalPaycar));
                   } else {
-                    int discountcar = (int) (carPolicy.getBasePremium() * 0.8);
+                    int totalPaycar = (int) (carPolicy.getBasePremium() * 0.8);
                     MessageCli.PRINT_DB_CAR_POLICY.printMessage(
                         carPolicy.getMakeModel(),
                         Integer.toString(carPolicy.getSumInsured()),
                         Integer.toString(carPolicy.getBasePremium()),
-                        Integer.toString(discountcar));
+                        Integer.toString(totalPaycar));
                   }
                 } else if (printPolicy instanceof HomePolicy) {
                   HomePolicy homePolicy = (HomePolicy) printPolicy;
                   if (numPolicies.get(i) < 3) {
-                    int discounthome = (int) (homePolicy.getBasePremium() * 0.9);
+                    int totalPayhome = (int) (homePolicy.getBasePremium() * 0.9);
                     MessageCli.PRINT_DB_HOME_POLICY.printMessage(
                         homePolicy.getAddress(),
                         Integer.toString(homePolicy.getSumInsured()),
                         Integer.toString(homePolicy.getBasePremium()),
-                        Integer.toString(discounthome));
+                        Integer.toString(totalPayhome));
                   } else {
-                    int discounthome = (int) (homePolicy.getBasePremium() * 0.8);
+                    int totalPayhome = (int) (homePolicy.getBasePremium() * 0.8);
                     MessageCli.PRINT_DB_HOME_POLICY.printMessage(
                         homePolicy.getAddress(),
                         Integer.toString(homePolicy.getSumInsured()),
                         Integer.toString(homePolicy.getBasePremium()),
-                        Integer.toString(discounthome));
+                        Integer.toString(totalPayhome));
                   }
                 }
               }
@@ -471,8 +471,8 @@ public class Profiles {
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
                 "",
                 Integer.toString(rank),
-                Usernames.get(i),
-                Integer.toString(Ages.get(i)),
+                userNames.get(i),
+                Integer.toString(userAges.get(i)),
                 Integer.toString(numPolicies.get(i)),
                 "ies",
                 "0");
@@ -485,7 +485,7 @@ public class Profiles {
 
   // Created a method to count the number of profiles in the database
   public int findNum() {
-    int number = Usernames.size();
+    int number = userNames.size();
 
     return number;
   }
@@ -507,9 +507,9 @@ public class Profiles {
     int truth = 0;
     int profileIndex = 0;
     // For loop to check if the user exists in the database
-    for (int i = 0; i < Usernames.size(); i++) {
+    for (int i = 0; i < userNames.size(); i++) {
       // If the user exists, the truth value is changed to 1 and the index of the user is stored
-      if (userName.equals(Usernames.get(i)) == true) {
+      if (userName.equals(userNames.get(i)) == true) {
         truth = 1;
         profileIndex = i;
       }
@@ -519,7 +519,7 @@ public class Profiles {
       // User is added on to the array list containing the loaded users along with their age in the
       // loaded ages array list
       loadedUsers.add(userName);
-      loadedUsersAge.add(Ages.get(profileIndex));
+      loadedUsersAge.add(userAges.get(profileIndex));
       // Printing message to show that profile is loaded
       MessageCli.PROFILE_LOADED.printMessage(userName);
       // If the user does exist, but there is already a profile loaded
@@ -528,7 +528,7 @@ public class Profiles {
       profileUnload();
       // Then we load the new profile and add user and age to the array lists
       loadedUsers.add(userName);
-      loadedUsersAge.add(Ages.get(profileIndex));
+      loadedUsersAge.add(userAges.get(profileIndex));
       // Printing message to show that profile is loaded
       MessageCli.PROFILE_LOADED.printMessage(userName);
       // If the user name does not exist in the database
@@ -566,8 +566,8 @@ public class Profiles {
     // Checking to see if the user is in the database, and finding its index in the user array list
     int profileCheck = 0;
     int profileIndex = 0;
-    for (int i = 0; i < Usernames.size(); i++) {
-      if (userName.equals(Usernames.get(i)) == true) {
+    for (int i = 0; i < userNames.size(); i++) {
+      if (userName.equals(userNames.get(i)) == true) {
         profileCheck = 1;
         profileIndex = i;
       }
@@ -575,8 +575,8 @@ public class Profiles {
     // If the user is in the database, delete the profile
     if (profileCheck == 1) {
       // Delete the user and their age from the array lists
-      Usernames.remove(profileIndex);
-      Ages.remove(profileIndex);
+      userNames.remove(profileIndex);
+      userAges.remove(profileIndex);
       // delete all policies associated with the profile
       for (int i = 0; i < allPolicies.size(); i++) {
         if (allPolicies.get(i).getUserName().equals(userName)) {
